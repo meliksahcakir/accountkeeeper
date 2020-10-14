@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Account Keeper</string>
+    <string name="my_accounts">My Accounts</string>
+    <string name="others">Others</string>
+    <string name="find">Find</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
 </resources>

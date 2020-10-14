@@ -25,6 +25,14 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -36,7 +44,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
     implementation "androidx.navigation:navigation-fragment:$version_navigation"
     implementation "androidx.navigation:navigation-ui:$version_navigation"
-    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+    implementation "androidx.fragment:fragment-ktx:$version_fragment"
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"

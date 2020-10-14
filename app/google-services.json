@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "65359925495",
+    "firebase_url": "https://account-keeper.firebaseio.com",
+    "project_id": "account-keeper",
+    "storage_bucket": "account-keeper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65359925495:android:3f9a6ff7da6b11671c03f2",
+        "android_client_info": {
+          "package_name": "com.meliksahcakir.accountkeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65359925495-n6h1c9dnsgg7a2ntmu1qth8f4nl37sm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNLHe5qn42dQ8AhkrNyO84qkikc7rfIQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65359925495-n6h1c9dnsgg7a2ntmu1qth8f4nl37sm6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

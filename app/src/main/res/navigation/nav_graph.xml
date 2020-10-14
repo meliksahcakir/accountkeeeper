@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/personalAccountsFragment">
+    <fragment
+        android:id="@+id/personalAccountsFragment"
+        android:name="com.meliksahcakir.accountkeeper.personal.PersonalAccountsFragment"
+        android:label="personal_accounts_fragment"
+        tools:layout="@layout/personal_accounts_fragment" />
+    <fragment
+        android:id="@+id/friendAccountsFragment"
+        android:name="com.meliksahcakir.accountkeeper.friend.FriendAccountsFragment"
+        android:label="friend_accounts_fragment"
+        tools:layout="@layout/friend_accounts_fragment" />
+    <fragment
+        android:id="@+id/findAccountsFragment"
+        android:name="com.meliksahcakir.accountkeeper.find.FindAccountsFragment"
+        android:label="find_accounts_fragment"
+        tools:layout="@layout/find_accounts_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.meliksahcakir.accountkeeper.settings.SettingsFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+</navigation>

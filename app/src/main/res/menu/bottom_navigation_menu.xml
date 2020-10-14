@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/personalAccountsFragment"
+        android:icon="@drawable/ic_wallet"
+        android:title="@string/my_accounts"/>
+
+    <item
+        android:id="@+id/friendAccountsFragment"
+        android:icon="@drawable/ic_archive"
+        android:title="@string/others" />
+
+    <item
+        android:id="@+id/action_empty"
+        android:title=""
+        android:checkable="false"
+        android:checked="false"
+        app:showAsAction="always"
+        android:enabled="false" />
+    <item
+        android:id="@+id/findAccountsFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/find" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+</menu>

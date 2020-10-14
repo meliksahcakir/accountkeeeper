@@ -3,7 +3,7 @@
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
     <style name="Theme.MyApp" parent="Base.Theme.MyApp" />
     <!--Base custom theme which will be shared between both light and dark theme variants-->
-    <style name="Base.Theme.MyApp" parent="Base.Theme.MaterialThemeBuilder">
+    <style name="Base.Theme.MyApp" parent="Base.Theme.AccountKeeper">
         <!--Material color attributes (light theme) -->
         <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
         <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
@@ -43,8 +43,7 @@
         <!--Component styles-->
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert</item>
     </style>
-    <style name="Base.Theme.MaterialThemeBuilder"
-        parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.AccountKeeper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:navigationBarColor">?android:attr/colorBackground</item>
