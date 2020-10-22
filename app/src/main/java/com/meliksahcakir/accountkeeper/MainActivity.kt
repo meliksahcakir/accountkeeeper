@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,4 +32,9 @@ class MainActivity : AppCompatActivity() {
         return item.onNavDestinationSelected(findNavController(R.id.navHostFragment))
                 || super.onOptionsItemSelected(item)
     }*/
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        FirebaseAuth.getInstance().signOut()
+    }
 }

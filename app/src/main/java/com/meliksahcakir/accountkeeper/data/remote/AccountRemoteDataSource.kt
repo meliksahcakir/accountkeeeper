@@ -16,14 +16,6 @@ import kotlinx.coroutines.withContext
 
 object AccountRemoteDataSource : IAccountDataSource {
 
-    private var uid = ""
-        set(value) {
-            observableAccounts.value = null
-            field = value
-            userRef = db.collection("users").document(uid)
-            accountsRef = userRef?.collection("accounts")
-        }
-
     private var db = Firebase.firestore
 
     private var userRef: DocumentReference? = null
@@ -32,10 +24,13 @@ object AccountRemoteDataSource : IAccountDataSource {
 
     private val observableAccounts = MutableLiveData<Result<List<Account>>>()
 
-    init {
-        userRef = db.collection("users").document(uid)
-        accountsRef = userRef?.collection("accounts")
-    }
+    private var uid = ""
+        set(value) {
+            observableAccounts.value = null
+            field = value
+            userRef = db.collection("users").document(uid)
+            accountsRef = userRef?.collection("accounts")
+        }
 
     override fun setUserId(uid: String) {
         this.uid = uid
@@ -53,7 +48,7 @@ object AccountRemoteDataSource : IAccountDataSource {
                     val documents = snapshot.documents
                     val list = documents.mapNotNull { it.toObject(Account::class.java) }
                     val result = Result.Success(list)
-                    observableAccounts.value = result
+                    observableAccounts.postValue(result)
                     result
                 } else {
                     Result.Error(Exception("Cannot retrieve accounts"))

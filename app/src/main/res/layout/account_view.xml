@@ -22,7 +22,7 @@
             android:layout_height="0dp"
             android:contentDescription="@string/account_image"
             android:src="@drawable/ic_card"
-            android:tint="@color/colorOnPrimary"
+            app:tint="@color/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@id/accountNameTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             android:background="?attr/selectableItemBackground"
             android:contentDescription="@string/copy_to_clipboard"
             android:src="@drawable/ic_edit"
-            android:tint="@color/colorOnPrimary"
+            app:tint="@color/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@id/accountNameTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
             android:layout_height="0dp"
             android:contentDescription="@string/wallet_image"
             android:src="@drawable/ic_wallet"
-            android:tint="@color/colorOnPrimary"
+            app:tint="@color/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@id/accountAddressTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
             android:layout_height="0dp"
             android:contentDescription="@string/extra"
             android:src="@drawable/ic_description"
-            android:tint="@color/colorOnPrimary"
+            app:tint="@color/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@id/accountDescriptionTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +135,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/qrImageView"
-            app:strokeColor="@color/colorOnPrimary" />
+            app:strokeColor="?colorOnPrimary" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/descriptionGroup"

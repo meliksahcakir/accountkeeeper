@@ -8,6 +8,7 @@ import com.meliksahcakir.accountkeeper.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class AccountLocalDataSource internal constructor(
     private val accountDao: AccountDao,
@@ -60,7 +61,11 @@ class AccountLocalDataSource internal constructor(
 
     override suspend fun saveAccountUnlessAvailable(account: Account) {
         withContext(ioDispatcher) {
-            accountDao.insertAccountIgnoreOnConflict(account)
+            try {
+                accountDao.insertAccountIgnoreOnConflict(account)
+            } catch (e: Exception) {
+                Timber.d(e.printStackTrace().toString())
+            }
         }
     }
 

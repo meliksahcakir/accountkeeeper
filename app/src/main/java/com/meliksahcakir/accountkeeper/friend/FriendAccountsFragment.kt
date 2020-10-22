@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 
 import com.meliksahcakir.accountkeeper.R
 
@@ -15,7 +16,7 @@ class FriendAccountsFragment : Fragment() {
         fun newInstance() = FriendAccountsFragment()
     }
 
-    private lateinit var viewModel: FriendAccountsViewModel
+    private val viewModel: FriendAccountsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +27,6 @@ class FriendAccountsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FriendAccountsViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

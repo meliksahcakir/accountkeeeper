@@ -51,8 +51,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle_extensions"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version_lifecycle_extensions"
     implementation "androidx.room:room-runtime:$version_room"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     kapt "androidx.room:room-compiler:$version_room"
     implementation "androidx.room:room-ktx:$version_room"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
@@ -61,8 +59,8 @@ dependencies {
     implementation "me.dm7.barcodescanner:zxing:$version_barcodescanner"
     implementation "com.google.firebase:firebase-analytics:$version_firebase_analytics"
     implementation "com.firebaseui:firebase-ui-auth:$version_firebase_ui_auth"
-    implementation "com.facebook.android:facebook-android-sdk:$version_fb_android_sdk"
     implementation "com.google.firebase:firebase-firestore-ktx:$version_firestore_ktx"
+    implementation "com.jakewharton.timber:timber:$version_timber"
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test.ext:junit:1.1.2"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
