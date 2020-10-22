@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:clipToPadding="true"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/accountLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/personal_account_background"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/accountImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/account_image"
+            android:src="@drawable/ic_card"
+            android:tint="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/accountNameTextView"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/accountNameTextView" />
+
+        <TextView
+            android:id="@+id/accountNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+            android:textIsSelectable="true"
+            app:layout_constraintStart_toEndOf="@id/accountImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Binance BTC Address" />
+
+        <ImageView
+            android:id="@+id/editImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/copy_to_clipboard"
+            android:src="@drawable/ic_edit"
+            android:tint="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/accountNameTextView"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/accountNameTextView" />
+
+        <ImageView
+            android:id="@+id/accountAddressImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/wallet_image"
+            android:src="@drawable/ic_wallet"
+            android:tint="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/accountAddressTextView"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/accountAddressTextView" />
+
+        <TextView
+            android:id="@+id/accountAddressTextView"
+            style="@style/TextAppearance.MyTheme.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textIsSelectable="true"
+            app:layout_constraintStart_toStartOf="@id/accountNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/accountNameTextView"
+            tools:text="TR12 3456 7812 3456 78" />
+
+        <ImageView
+            android:id="@+id/accountDescriptionImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/extra"
+            android:src="@drawable/ic_description"
+            android:tint="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/accountDescriptionTextView"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/accountDescriptionTextView" />
+
+        <TextView
+            android:id="@+id/accountDescriptionTextView"
+            style="@style/TextAppearance.MyTheme.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textIsSelectable="true"
+            app:layout_constraintStart_toStartOf="@id/accountNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/accountAddressTextView"
+            tools:text="TR12 3456 7812 3456 78" />
+
+        <ImageView
+            android:id="@+id/qrImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/qr_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accountDescriptionTextView" />
+
+        <ImageView
+            android:id="@+id/privacyImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_public"
+            app:layout_constraintBottom_toBottomOf="@id/qrImageView"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/copyAddressButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/copy_address"
+            android:textColor="#FFF"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/qrImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/qrImageView"
+            app:strokeColor="@color/colorOnPrimary" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/descriptionGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="accountDescriptionTextView, accountDescriptionImageView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
