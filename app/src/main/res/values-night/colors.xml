@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorHeadline">#222455</color>
+    <color name="colorSubtitle">#6e7faa</color>
+    <color name="colorGreen">#4cd964</color>
+    <color name="colorYellow">#FFCC00</color>
+    <color name="colorGray">#DFE4ED</color>
+    <color name="colorPersonal">#b83b5e</color>
+    <color name="colorPersonalVariant">#e6739f</color>
+    <color name="colorSaved">#ff9642</color>
+    <color name="colorSavedVariant">#fca652</color>
+    <color name="colorRed">#cf6679</color>
+</resources>
