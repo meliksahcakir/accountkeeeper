@@ -5,9 +5,9 @@
     <color name="colorGreen">#4cd964</color>
     <color name="colorYellow">#FFCC00</color>
     <color name="colorGray">#DFE4ED</color>
-    <color name="colorPersonal">#c6627e</color>
-    <color name="colorPersonalVariant">#F48FB1</color>
-    <color name="colorSaved">#ff9642</color>
-    <color name="colorSavedVariant">#fca652</color>
+    <color name="colorPersonal">#676ccd</color>
+    <color name="colorPersonalVariant">#7b68ee</color>
+    <color name="colorSaved">#618ee8</color>
+    <color name="colorSavedVariant">#6495ed</color>
     <color name="colorRed">#cf6679</color>
 </resources>
