@@ -89,7 +89,7 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
         descriptionGroup.isVisible = account.accountDescription != ""
         privacyImageView.setImageResource(if (account.global) R.drawable.ic_public else R.drawable.ic_private)
         copyAddressButton.setOnClickListener {
-            parent.context.share(accountAddressTextView.text)
+            parent.context.share(accountAddressTextView.text.toString())
         }
         qrImageView.setOnClickListener {
             showQrCodeDialog(accountAddressTextView.text.toString())

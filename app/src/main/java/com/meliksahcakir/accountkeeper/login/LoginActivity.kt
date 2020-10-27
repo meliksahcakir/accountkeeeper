@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class LoginActivity : AppCompatActivity() {
 
@@ -152,6 +153,7 @@ class LoginActivity : AppCompatActivity() {
     private fun onUserAcquired() {
         val user = loginViewModel.getUser()
         user?.let {
+            Timber.d("uid = ${it.uid}")
             val repository = (application as AccountKeeperApplication).accountRepository
             repository.setUserId(user.uid)
             loginViewModel.viewModelScope.launch {

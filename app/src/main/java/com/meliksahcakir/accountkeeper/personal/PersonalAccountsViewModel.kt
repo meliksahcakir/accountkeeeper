@@ -79,10 +79,9 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
         _accountUpdateEvent.value = Event(account)
     }
 
-    fun addAccount(account: Account) {
+    fun undoAccount(account: Account) {
         viewModelScope.launch {
             repository.saveAccount(account)
-            _snackBarParams.value = Event(SnackBarParameters(R.string.new_account_added))
         }
     }
 
@@ -101,6 +100,9 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
         }
     }
 
+    fun updateSearchParameter(search: String) {
+        _searchText.value = search
+    }
 }
 
 @Suppress("UNCHECKED_CAST")

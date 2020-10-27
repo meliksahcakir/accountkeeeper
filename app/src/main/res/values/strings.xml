@@ -29,6 +29,7 @@
     <string name="extra">Extra</string>
     <string name="copy_address">Copy Address</string>
     <string name="no_data_available">You have not saved any account yet</string>
+    <string name="search_not_found">Could not find any account</string>
     <string name="search_your_personal_accounts">Search your personal accounts</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

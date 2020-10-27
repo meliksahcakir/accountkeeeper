@@ -54,11 +54,19 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
             emptyListGroup.isVisible = it.isEmpty()
             recyclerView.isVisible = it.isNotEmpty()
             personalAccountAdapter.submitList(it)
+            if (toolbarEditText.text.toString() == "") {
+                emptyListTextView.text = getString(R.string.no_data_available)
+            } else {
+                emptyListTextView.text = getString(R.string.search_not_found)
+            }
         }
         viewModel.snackBarParams.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { params ->
                 showSnackBar(params)
             }
+        }
+        toolbarEditText.afterTextChanged {
+            viewModel.updateSearchParameter(it)
         }
 
         setUpNavigation()
@@ -110,7 +118,7 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
         if (parameters.action != SnackBarAction.NONE) {
             snackbar.setAction(parameters.actionStringId) {
                 when (parameters.action) {
-                    SnackBarAction.UNDO -> viewModel.addAccount(parameters.data as Account)
+                    SnackBarAction.UNDO -> viewModel.undoAccount(parameters.data as Account)
                     SnackBarAction.NONE -> TODO()
                     SnackBarAction.OPEN -> TODO()
                     SnackBarAction.SAVE -> TODO()
