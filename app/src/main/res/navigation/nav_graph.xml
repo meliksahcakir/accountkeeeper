@@ -8,37 +8,79 @@
         android:id="@+id/personalAccountsFragment"
         android:name="com.meliksahcakir.accountkeeper.personal.PersonalAccountsFragment"
         android:label="personal_accounts_fragment"
-        tools:layout="@layout/personal_accounts_fragment" >
+        tools:layout="@layout/personal_accounts_fragment">
         <action
             android:id="@+id/action_personalAccountsFragment_to_addUpdateAccountFragment"
-            app:destination="@id/addUpdateAccountFragment" />
+            app:destination="@id/addUpdateAccountFragment">
+            <argument
+                android:name="account_id"
+                app:argType="string" />
+            <argument
+                android:name="exitLocation"
+                app:argType="integer[]" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/friendAccountsFragment"
         android:name="com.meliksahcakir.accountkeeper.friend.FriendAccountsFragment"
         android:label="friend_accounts_fragment"
-        tools:layout="@layout/friend_accounts_fragment" >
+        tools:layout="@layout/friend_accounts_fragment">
         <action
             android:id="@+id/action_friendAccountsFragment_to_addUpdateAccountFragment"
-            app:destination="@id/addUpdateAccountFragment" />
+            app:destination="@id/addUpdateAccountFragment">
+            <argument
+                android:name="account_id"
+                app:argType="string" />
+            <argument
+                android:name="exitLocation"
+                app:argType="integer[]" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/findAccountsFragment"
         android:name="com.meliksahcakir.accountkeeper.find.FindAccountsFragment"
         android:label="find_accounts_fragment"
-        tools:layout="@layout/find_accounts_fragment" >
+        tools:layout="@layout/find_accounts_fragment">
         <action
             android:id="@+id/action_findAccountsFragment_to_addUpdateAccountFragment"
-            app:destination="@id/addUpdateAccountFragment" />
+            app:destination="@id/addUpdateAccountFragment">
+            <argument
+                android:name="account_id"
+                app:argType="string" />
+            <argument
+                android:name="exitLocation"
+                app:argType="integer[]" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.meliksahcakir.accountkeeper.settings.SettingsFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_addUpdateAccountFragment"
+            app:destination="@id/addUpdateAccountFragment">
+            <argument
+                android:name="account_id"
+                app:argType="string" />
+            <argument
+                android:name="exitLocation"
+                app:argType="integer[]" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/addUpdateAccountFragment"
         android:name="com.meliksahcakir.accountkeeper.addupdate.AddUpdateAccountFragment"
         android:label="add_update_account_fragment"
-        tools:layout="@layout/add_update_account_fragment" />
+        tools:layout="@layout/add_update_account_fragment">
+        <argument
+            android:name="account_id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="exitLocation"
+            android:defaultValue="@null"
+            app:argType="integer[]"
+            app:nullable="true" />
+    </fragment>
 </navigation>

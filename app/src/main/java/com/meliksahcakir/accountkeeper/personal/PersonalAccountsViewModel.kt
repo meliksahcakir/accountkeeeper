@@ -25,6 +25,12 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
     private val _snackBarParams = MutableLiveData<Event<SnackBarParameters>>()
     val snackBarParams: LiveData<Event<SnackBarParameters>> = _snackBarParams
 
+    private val _accountUpdateEvent = MutableLiveData<Event<Account>>()
+    val accountUpdateEvent: LiveData<Event<Account>> = _accountUpdateEvent
+
+    private val _newAccountEvent = MutableLiveData<Event<Unit>>()
+    val newAccountEvent: LiveData<Event<Unit>> = _newAccountEvent
+
     init {
         loadAccounts()
     }
@@ -66,7 +72,11 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
     }
 
     fun onAddButtonClicked() {
+        _newAccountEvent.value = Event(Unit)
+    }
 
+    fun onUpdateButtonClicked(account: Account) {
+        _accountUpdateEvent.value = Event(account)
     }
 
     fun addAccount(account: Account) {
@@ -76,12 +86,12 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
         }
     }
 
-    fun updateAccount(account: Account) {
+    /*fun updateAccount(account: Account) {
         viewModelScope.launch {
             repository.updateAccount(account)
             _snackBarParams.value = Event(SnackBarParameters(R.string.account_updated))
         }
-    }
+    }*/
 
     fun deleteAccount(account: Account) {
         viewModelScope.launch {

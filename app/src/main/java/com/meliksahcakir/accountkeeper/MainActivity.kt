@@ -2,12 +2,17 @@ package com.meliksahcakir.accountkeeper
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.meliksahcakir.accountkeeper.utils.ExitWithAnimation
+import com.meliksahcakir.accountkeeper.utils.color
+import com.meliksahcakir.accountkeeper.utils.exitCircularReveal
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
     private lateinit var host: NavHostFragment
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,26 +20,42 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         host = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         bottomNavigationView.setupWithNavController(host.navController)
+        host.navController.addOnDestinationChangedListener(this)
     }
-
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val retValue = super.onCreateOptionsMenu(menu)
-        // The NavigationView already has these same navigation items, so we only add
-        // navigation items to the menu here if there isn't a NavigationView
-        if (bottomNavigationView == null) {
-            menuInflater.inflate(R.menu.bottom_navigation_menu, menu)
-            return true
-        }
-        return retValue
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController(R.id.navHostFragment))
-                || super.onOptionsItemSelected(item)
-    }*/
 
     override fun onBackPressed() {
-        super.onBackPressed()
         FirebaseAuth.getInstance().signOut()
+        with(host.childFragmentManager.fragments[0]) {
+            if ((this as? ExitWithAnimation)?.isToBeExitedWithAnimation() == true) {
+                if (this.posX == null || this.posY == null) {
+                    onBackPressed()
+                } else {
+                    this.view?.exitCircularReveal(
+                        this.posX!!,
+                        this.posY!!,
+                        requireContext().color(R.color.colorBackground),
+                        requireContext().color(R.color.colorPrimary)
+                    ) {
+                        super.onBackPressed()
+                    } ?: super.onBackPressed()
+                }
+            } else {
+                super.onBackPressed()
+            }
+        }
+    }
+
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        when (destination.id) {
+            R.id.personalAccountsFragment -> mainFab.setImageResource(R.drawable.ic_add)
+            R.id.friendAccountsFragment -> mainFab.setImageResource(R.drawable.ic_add)
+            R.id.findAccountsFragment -> mainFab.setImageResource(R.drawable.ic_search)
+            R.id.settingsFragment -> mainFab.setImageResource(R.drawable.ic_home)
+            R.id.addUpdateAccountFragment -> mainFab.setImageResource(R.drawable.ic_save)
+        }
     }
 }

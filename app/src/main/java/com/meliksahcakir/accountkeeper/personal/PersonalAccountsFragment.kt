@@ -8,16 +8,17 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.meliksahcakir.accountkeeper.AccountKeeperApplication
+import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.Account
-import com.meliksahcakir.accountkeeper.utils.SnackBarAction
-import com.meliksahcakir.accountkeeper.utils.SnackBarParameters
-import com.meliksahcakir.accountkeeper.utils.SwipeCallbacks
+import com.meliksahcakir.accountkeeper.utils.*
 import com.meliksahcakir.accountkeeper.view.AccountAdapterListener
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.personal_accounts_fragment.*
 
 class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
@@ -42,7 +43,8 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         personalAccountAdapter = PersonalAccountAdapter(this)
-        val itemTouchHelper = ItemTouchHelper(SwipeCallbacks(requireContext(), personalAccountAdapter))
+        val itemTouchHelper =
+            ItemTouchHelper(SwipeCallbacks(requireContext(), personalAccountAdapter))
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = personalAccountAdapter
@@ -58,6 +60,33 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
                 showSnackBar(params)
             }
         }
+
+        setUpNavigation()
+    }
+
+    private fun setUpNavigation() {
+        val mainFab = (requireActivity() as MainActivity).mainFab
+        viewModel.accountUpdateEvent.observe(viewLifecycleOwner, EventObserver {
+            val location = mainFab.findLocationOfCenterOnTheScreen()
+            val action = PersonalAccountsFragmentDirections
+                .actionPersonalAccountsFragmentToAddUpdateAccountFragment(
+                    it.accountId,
+                    location
+                )
+            findNavController().navigate(action)
+        })
+        viewModel.newAccountEvent.observe(viewLifecycleOwner, EventObserver {
+            val location = mainFab.findLocationOfCenterOnTheScreen()
+            val action = PersonalAccountsFragmentDirections
+                .actionPersonalAccountsFragmentToAddUpdateAccountFragment(
+                    "",
+                    location
+                )
+            findNavController().navigate(action)
+        })
+        mainFab.setOnClickListener {
+            viewModel.onAddButtonClicked()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,6 +94,7 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
     }
 
     override fun onEditButtonClicked(account: Account) {
+        viewModel.onUpdateButtonClicked(account)
     }
 
     override fun onShareAccount(account: Account) {

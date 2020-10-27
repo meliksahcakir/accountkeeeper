@@ -3,17 +3,18 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion rootProject.compile_sdk_version
     buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.meliksahcakir.accountkeeper"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion rootProject.min_sdk_version
+        targetSdkVersion rootProject.target_sdk_version
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -42,8 +43,8 @@ dependencies {
     implementation "androidx.core:core-ktx:$version_core"
     implementation "com.google.android.material:material:$version_material"
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
-    implementation "androidx.navigation:navigation-fragment:$version_navigation"
-    implementation "androidx.navigation:navigation-ui:$version_navigation"
+    implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
     implementation "androidx.fragment:fragment-ktx:$version_fragment"
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
