@@ -1,7 +1,107 @@
 package com.meliksahcakir.accountkeeper.friend
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.meliksahcakir.accountkeeper.R
+import com.meliksahcakir.accountkeeper.data.Account
+import com.meliksahcakir.accountkeeper.data.AccountRepository
+import com.meliksahcakir.accountkeeper.utils.Event
+import com.meliksahcakir.accountkeeper.utils.Result
+import com.meliksahcakir.accountkeeper.utils.SnackBarAction
+import com.meliksahcakir.accountkeeper.utils.SnackBarParameters
+import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
-class FriendAccountsViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class FriendAccountsViewModel(private val repository: AccountRepository) : ViewModel() {
+
+    private val _searchText = MutableLiveData<String>("")
+
+    private val _accounts: LiveData<List<Account>> = _searchText.switchMap { search ->
+        repository.observeAccounts().switchMap { filterAccounts(search, it) }
+    }
+
+    val accounts: LiveData<List<Account>> = _accounts
+
+    private val _snackBarParams = MutableLiveData<Event<SnackBarParameters>>()
+    val snackBarParams: LiveData<Event<SnackBarParameters>> = _snackBarParams
+
+    private val _accountUpdateEvent = MutableLiveData<Event<Account>>()
+    val accountUpdateEvent: LiveData<Event<Account>> = _accountUpdateEvent
+
+    private val _newAccountEvent = MutableLiveData<Event<Unit>>()
+    val newAccountEvent: LiveData<Event<Unit>> = _newAccountEvent
+
+    init {
+        loadAccounts()
+    }
+
+    private fun loadAccounts() {
+        _searchText.value = ""
+    }
+
+    private fun filterAccounts(
+        search: String,
+        accountResult: Result<List<Account>>
+    ): LiveData<List<Account>> {
+        val result = MutableLiveData<List<Account>>()
+        if (accountResult is Result.Success) {
+            viewModelScope.launch {
+                result.value = filterAccounts(search, accountResult.data)
+            }
+        } else {
+            result.value = emptyList()
+            _snackBarParams.value = Event(SnackBarParameters(R.string.error_loading_accounts))
+        }
+
+        return result
+    }
+
+    private fun filterAccounts(search: String, accounts: List<Account>): List<Account> {
+        val list = ArrayList<Account>()
+        for (account in accounts) {
+            if (!account.personalAccount) {
+                val accountName = account.accountName.toLowerCase(Locale.getDefault())
+                val searchLc = search.toLowerCase(Locale.getDefault())
+                if (searchLc == "" || accountName.contains(searchLc)) {
+                    list.add(account)
+                }
+            }
+        }
+        return list
+    }
+
+    fun onAddButtonClicked() {
+        _newAccountEvent.value = Event(Unit)
+    }
+
+    fun onUpdateButtonClicked(account: Account) {
+        _accountUpdateEvent.value = Event(account)
+    }
+
+    fun undoAccount(account: Account) {
+        viewModelScope.launch {
+            repository.saveAccount(account)
+        }
+    }
+
+    fun deleteAccount(account: Account) {
+        viewModelScope.launch {
+            repository.deleteAccount(account)
+            _snackBarParams.value =
+                Event(SnackBarParameters(R.string.account_deleted, account, SnackBarAction.UNDO))
+        }
+    }
+
+    fun updateSearchParameter(search: String) {
+        _searchText.value = search
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+class FriendAccountsViewModelFactory(
+    private val repository: AccountRepository
+) : ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return (FriendAccountsViewModel(repository) as T)
+    }
 }

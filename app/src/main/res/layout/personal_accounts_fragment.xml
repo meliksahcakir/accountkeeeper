@@ -88,7 +88,7 @@
         android:layout_height="140dp"
         android:alpha="0.8"
         android:src="@drawable/ic_wallet"
-        app:tint="@color/colorPrimary"
+        app:tint="@color/colorPersonal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +102,7 @@
         android:alpha="0.8"
         android:text="@string/no_data_available"
         android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
+        android:textColor="@color/colorPersonalVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emptyListImageView" />
