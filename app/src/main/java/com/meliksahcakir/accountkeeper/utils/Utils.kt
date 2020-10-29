@@ -143,3 +143,7 @@ fun View.findLocationOfCenterOnTheScreen(): IntArray {
     positions[1] = positions[1] + height / 2
     return positions
 }
+
+fun EditText.moveCursorToEnd(){
+    setSelection(text.length)
+}

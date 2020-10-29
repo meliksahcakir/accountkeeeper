@@ -80,6 +80,7 @@ class FriendAccountsFragment : Fragment(), AccountAdapterListener {
             val action = FriendAccountsFragmentDirections
                 .actionFriendAccountsFragmentToAddUpdateAccountFragment(
                     it.accountId,
+                    false,
                     location
                 )
             findNavController().navigate(action)
@@ -89,6 +90,7 @@ class FriendAccountsFragment : Fragment(), AccountAdapterListener {
             val action = FriendAccountsFragmentDirections
                 .actionFriendAccountsFragmentToAddUpdateAccountFragment(
                     "",
+                    false,
                     location
                 )
             findNavController().navigate(action)

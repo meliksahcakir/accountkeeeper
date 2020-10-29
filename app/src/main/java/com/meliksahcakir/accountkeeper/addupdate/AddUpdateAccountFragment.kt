@@ -15,7 +15,8 @@ import com.meliksahcakir.accountkeeper.utils.startCircularReveal
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val ARG_EXIT_LOCATION = "exitLocation"
-private const val ARG_EXIT_Y = "exit_y"
+private const val ARG_ACCOUNT_ID = "accountId"
+private const val ARG_PERSONAL = "personal"
 
 class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
 
@@ -24,6 +25,7 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
     }
 
     private val viewModel: FriendAccountsViewModel by viewModels()
+    private var accountId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,7 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
                 posX = it[0]
                 posY = it[1]
             }
+            accountId = args.getString(ARG_ACCOUNT_ID, "")
         }
     }
 

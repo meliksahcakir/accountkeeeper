@@ -79,6 +79,7 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
             val action = PersonalAccountsFragmentDirections
                 .actionPersonalAccountsFragmentToAddUpdateAccountFragment(
                     it.accountId,
+                    true,
                     location
                 )
             findNavController().navigate(action)
@@ -88,6 +89,7 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
             val action = PersonalAccountsFragmentDirections
                 .actionPersonalAccountsFragmentToAddUpdateAccountFragment(
                     "",
+                    true,
                     location
                 )
             findNavController().navigate(action)

@@ -7,8 +7,6 @@ import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.utils.Result
 import com.meliksahcakir.accountkeeper.utils.isEmailValid
 import com.meliksahcakir.accountkeeper.utils.isPasswordValid
-import com.meliksahcakir.accountkeeper.utils.isRepeatPasswordValid
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
@@ -21,6 +19,9 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     private val _loginPage = MutableLiveData<Boolean>(true)
     val loginPage: LiveData<Boolean> = _loginPage
+
+    private val _passwordVisibility = MutableLiveData<Boolean>(false)
+    val passwordVisibility: LiveData<Boolean> = _passwordVisibility
 
     fun onLoginPageChanged() {
         _loginPage.value = _loginPage.value != true
@@ -67,10 +68,12 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         } else {
             viewModelScope.launch {
                 val result = loginRepository.sendPasswordResetEmail(email)
-                if(result is Result.Success) {
-                    _loginForm.value = LoginFormState(resetPasswordStatus = R.string.password_reset_email_sent)
+                if (result is Result.Success) {
+                    _loginForm.value =
+                        LoginFormState(resetPasswordStatus = R.string.password_reset_email_sent)
                 } else {
-                    _loginForm.value = LoginFormState(resetPasswordStatus = R.string.password_reset_email_error)
+                    _loginForm.value =
+                        LoginFormState(resetPasswordStatus = R.string.password_reset_email_error)
                 }
             }
         }
@@ -78,6 +81,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun getUser(): FirebaseUser? {
         return loginRepository.getUser()
+    }
+
+    fun togglePasswordVisibility() {
+        val visibility = _passwordVisibility.value ?: false
+        _passwordVisibility.value = !visibility
     }
 }
 

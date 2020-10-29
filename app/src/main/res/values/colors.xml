@@ -9,8 +9,8 @@
     <color name="colorError">#b00020</color>
     <color name="colorOnPrimary">#ffffff</color>
     <color name="colorOnSecondary">#ffffff</color>
-    <color name="colorOnBackground">#404040</color>
-    <color name="colorOnSurface">#404040</color>
+    <color name="colorOnBackground">#808080</color>
+    <color name="colorOnSurface">#808080</color>
     <color name="colorOnError">#ffffff</color>
     <color name="colorHeadline">#222455</color>
     <color name="colorSubtitle">#6e7faa</color>

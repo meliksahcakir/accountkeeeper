@@ -23,7 +23,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="?colorOnPrimary"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -34,7 +34,8 @@
                 android:focusableInTouchMode="true"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:titleTextAppearance="@style/Widget.AppCompat.TextView"
-                app:titleTextColor="@color/colorPrimary">
+                app:titleTextColor="?attr/colorPrimary"
+                app:contentInsetStart="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -44,8 +45,9 @@
                         android:id="@+id/toolbarEditText"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginEnd="4dp"
-                        android:background="@color/colorOnPrimary"
+                        android:paddingEnd="30dp"
+                        android:paddingStart="15dp"
+                        android:background="?attr/colorSurface"
                         android:focusable="true"
                         android:imeOptions="actionSearch"
                         android:inputType="text"
@@ -61,7 +63,7 @@
                         android:layout_height="30dp"
                         android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_search"
-                        app:tint="@color/colorPrimaryVariant"
+                        app:tint="?attr/colorSecondary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -102,7 +104,7 @@
         android:alpha="0.8"
         android:text="@string/no_data_available"
         android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
-        android:textColor="@color/colorSavedVariant"
+        android:textColor="@color/colorSaved"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emptyListImageView" />

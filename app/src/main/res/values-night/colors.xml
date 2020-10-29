@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#5663ff</color>
-    <color name="colorPrimaryVariant">#4050ff</color>
-    <color name="colorSecondary">#5663ff</color>
-    <color name="colorSecondaryVariant">#4050ff</color>
+    <color name="colorPrimary">#bbc0ff</color>
+    <color name="colorPrimaryVariant">#ccd0ff</color>
+    <color name="colorSecondary">#bbc0ff</color>
+    <color name="colorSecondaryVariant">#ccd0ff</color>
     <color name="colorBackground">#121212</color>
     <color name="colorSurface">#202020</color>
     <color name="colorError">#cf6679</color>

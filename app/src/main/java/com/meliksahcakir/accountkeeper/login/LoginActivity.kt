@@ -2,6 +2,7 @@ package com.meliksahcakir.accountkeeper.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +19,9 @@ import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.utils.Result
 import com.meliksahcakir.accountkeeper.utils.afterTextChanged
+import com.meliksahcakir.accountkeeper.utils.moveCursorToEnd
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class LoginActivity : AppCompatActivity() {
@@ -67,17 +67,28 @@ class LoginActivity : AppCompatActivity() {
             onUserAcquired()
         }
 
+        loginViewModel.passwordVisibility.observe(this) {
+            if (it) {
+                passwordToggleImageView.setImageResource(R.drawable.ic_visibility_off)
+                passwordEditText.transformationMethod = null
+            } else {
+                passwordToggleImageView.setImageResource(R.drawable.ic_visibility_on)
+                passwordEditText.transformationMethod = PasswordTransformationMethod()
+            }
+            passwordEditText.moveCursorToEnd()
+        }
+
         formChangeTextView.setOnClickListener {
             loginViewModel.onLoginPageChanged()
         }
 
         emailEditText.afterTextChanged {
-            emailTextInputLayout.error = null
+            updateEmailErrorStatus("")
             onDataChanged()
         }
 
         passwordEditText.afterTextChanged {
-            passwordTextInputLayout.error = null
+            updatePasswordErrorStatus("")
             onDataChanged()
         }
 
@@ -86,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
                 if (it.isDataValid) {
                     updateViews(true)
                     val email = emailEditText.text?.toString() ?: ""
-                    val password =  passwordEditText.text?.toString() ?: ""
+                    val password = passwordEditText.text?.toString() ?: ""
                     if (loginViewModel.isLoginPage()) {
                         loginViewModel.login(email, password)
                     } else {
@@ -116,14 +127,18 @@ class LoginActivity : AppCompatActivity() {
         googleSignInButton.setOnClickListener {
             googleSignIn()
         }
+
+        passwordToggleImageView.setOnClickListener {
+            loginViewModel.togglePasswordVisibility()
+        }
     }
 
     private fun showErrors(loginState: LoginFormState) {
         if (loginState.emailError != null) {
-            emailTextInputLayout.error = getString(loginState.emailError)
+            updateEmailErrorStatus(getString(loginState.emailError))
         }
         if (loginState.passwordError != null) {
-            passwordTextInputLayout.error = getString(loginState.passwordError)
+            updatePasswordErrorStatus(getString(loginState.passwordError))
         }
         if (loginState.resetPasswordStatus != null) {
             Toast.makeText(this, loginState.resetPasswordStatus, Toast.LENGTH_SHORT).show()
@@ -176,5 +191,18 @@ class LoginActivity : AppCompatActivity() {
         forgotPasswordTextView.isEnabled = !operating
         formChangeTextView.isEnabled = !operating
         loading.isVisible = operating
+    }
+
+    private fun updateEmailErrorStatus(error: String) {
+        emailErrorImageView.isVisible = error != ""
+        emailErrorTextView.isInvisible = error == ""
+        emailErrorTextView.text = error
+    }
+
+    private fun updatePasswordErrorStatus(error: String) {
+        passwordErrorImageView.isVisible = error != ""
+        passwordToggleImageView.isVisible = error == ""
+        passwordErrorTextView.isInvisible = error == ""
+        passwordErrorTextView.text = error
     }
 }

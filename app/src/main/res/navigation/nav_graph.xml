@@ -13,8 +13,11 @@
             android:id="@+id/action_personalAccountsFragment_to_addUpdateAccountFragment"
             app:destination="@id/addUpdateAccountFragment">
             <argument
-                android:name="account_id"
+                android:name="accountId"
                 app:argType="string" />
+            <argument
+                android:name="personal"
+                app:argType="boolean" />
             <argument
                 android:name="exitLocation"
                 app:argType="integer[]" />
@@ -29,8 +32,11 @@
             android:id="@+id/action_friendAccountsFragment_to_addUpdateAccountFragment"
             app:destination="@id/addUpdateAccountFragment">
             <argument
-                android:name="account_id"
+                android:name="accountId"
                 app:argType="string" />
+            <argument
+                android:name="personal"
+                app:argType="boolean" />
             <argument
                 android:name="exitLocation"
                 app:argType="integer[]" />
@@ -45,8 +51,11 @@
             android:id="@+id/action_findAccountsFragment_to_addUpdateAccountFragment"
             app:destination="@id/addUpdateAccountFragment">
             <argument
-                android:name="account_id"
+                android:name="accountId"
                 app:argType="string" />
+            <argument
+                android:name="personal"
+                app:argType="boolean" />
             <argument
                 android:name="exitLocation"
                 app:argType="integer[]" />
@@ -57,16 +66,6 @@
         android:name="com.meliksahcakir.accountkeeper.settings.SettingsFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment">
-        <action
-            android:id="@+id/action_settingsFragment_to_addUpdateAccountFragment"
-            app:destination="@id/addUpdateAccountFragment">
-            <argument
-                android:name="account_id"
-                app:argType="string" />
-            <argument
-                android:name="exitLocation"
-                app:argType="integer[]" />
-        </action>
     </fragment>
     <fragment
         android:id="@+id/addUpdateAccountFragment"
@@ -74,9 +73,13 @@
         android:label="add_update_account_fragment"
         tools:layout="@layout/add_update_account_fragment">
         <argument
-            android:name="account_id"
+            android:name="accountId"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="personal"
+            app:argType="boolean"
+            android:defaultValue="true" />
         <argument
             android:name="exitLocation"
             android:defaultValue="@null"
