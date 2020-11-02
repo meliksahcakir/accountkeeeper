@@ -63,6 +63,6 @@
         <item name="android:textAppearance">@style/TextAppearance.MyTheme.Subtitle1</item>
         <item name="checkedIconEnabled">false</item>
         <item name="chipIconVisible">true</item>
-        <item name="chipIconTint">?attr/colorOnSurface</item>
+        <item name="chipIconTint">@color/colorChipIcon</item>
     </style>
 </resources>

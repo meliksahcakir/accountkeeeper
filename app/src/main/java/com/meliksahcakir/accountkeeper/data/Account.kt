@@ -34,4 +34,20 @@ data class Account(
         const val LOCATION = 4
         const val OTHER = 5
     }
+
+    fun update(
+        name: String,
+        number: String,
+        desc: String,
+        type: Int,
+        personal: Boolean,
+        global: Boolean
+    ) {
+        this.accountName = name
+        this.accountNumber = number
+        this.accountDescription = desc
+        this.accountType = type
+        this.personalAccount = personal
+        this.global = global
+    }
 }

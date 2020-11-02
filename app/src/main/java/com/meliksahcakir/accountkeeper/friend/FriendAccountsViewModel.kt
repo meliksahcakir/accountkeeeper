@@ -88,7 +88,7 @@ class FriendAccountsViewModel(private val repository: AccountRepository) : ViewM
         viewModelScope.launch {
             repository.deleteAccount(account)
             _snackBarParams.value =
-                Event(SnackBarParameters(R.string.account_deleted, account, SnackBarAction.UNDO))
+                Event(SnackBarParameters(R.string.account_deleted, account, SnackBarAction.UNDO, R.string.undo))
         }
     }
 

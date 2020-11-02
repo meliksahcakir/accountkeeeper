@@ -25,6 +25,7 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
 
     companion object {
         fun newInstance() = PersonalAccountsFragment()
+        private var ARG_SNACK_BAR_TEXT = "SNACK_BAR_TEXT"
     }
 
     private val viewModel by viewModels<PersonalAccountsViewModel> {
@@ -60,16 +61,22 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
                 emptyListTextView.text = getString(R.string.search_not_found)
             }
         }
-        viewModel.snackBarParams.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { params ->
-                showSnackBar(params)
-            }
-        }
+        viewModel.snackBarParams.observe(viewLifecycleOwner, EventObserver {
+            showSnackBar(it)
+        })
         toolbarEditText.afterTextChanged {
             viewModel.updateSearchParameter(it)
         }
 
         setUpNavigation()
+        arguments?.let { args ->
+            val message = args.getString(ARG_SNACK_BAR_TEXT)
+            message?.let {
+                val snackbar = Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT)
+                snackbar.anchorView = (requireActivity() as MainActivity).mainFab
+                snackbar.show()
+            }
+        }
     }
 
     private fun setUpNavigation() {
@@ -117,6 +124,7 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
     private fun showSnackBar(parameters: SnackBarParameters) {
         val snackbar =
             Snackbar.make(requireView(), parameters.messageStringId, Snackbar.LENGTH_SHORT)
+        snackbar.anchorView = (requireActivity() as MainActivity).mainFab
         if (parameters.action != SnackBarAction.NONE) {
             snackbar.setAction(parameters.actionStringId) {
                 when (parameters.action) {

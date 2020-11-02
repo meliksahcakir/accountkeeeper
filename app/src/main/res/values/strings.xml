@@ -48,4 +48,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="is_it_going_to_be_private">Is this private account?</string>
+    <string name="account_saved_successfully">Account is saved successfully.</string>
+    <string name="undo">Undo</string>
 </resources>

@@ -22,6 +22,11 @@
                 android:name="exitLocation"
                 app:argType="integer[]" />
         </action>
+        <argument
+            android:name="SNACK_BAR_TEXT"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/friendAccountsFragment"
@@ -41,6 +46,11 @@
                 android:name="exitLocation"
                 app:argType="integer[]" />
         </action>
+        <argument
+            android:name="SNACK_BAR_TEXT"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/findAccountsFragment"
@@ -66,6 +76,7 @@
         android:name="com.meliksahcakir.accountkeeper.settings.SettingsFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment">
+
     </fragment>
     <fragment
         android:id="@+id/addUpdateAccountFragment"
@@ -78,12 +89,30 @@
             app:nullable="true" />
         <argument
             android:name="personal"
-            app:argType="boolean"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:argType="boolean" />
         <argument
             android:name="exitLocation"
             android:defaultValue="@null"
             app:argType="integer[]"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_addUpdateAccountFragment_to_friendAccountsFragment"
+            app:destination="@id/friendAccountsFragment"
+            app:popUpTo="@id/friendAccountsFragment"
+            app:popUpToInclusive="true" >
+            <argument
+                android:name="SNACK_BAR_TEXT"
+                android:defaultValue="@null" />
+        </action>
+        <action
+            android:id="@+id/action_addUpdateAccountFragment_to_personalAccountsFragment"
+            app:destination="@id/personalAccountsFragment"
+            app:popUpTo="@id/personalAccountsFragment"
+            app:popUpToInclusive="true" >
+            <argument
+                android:name="SNACK_BAR_TEXT"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
 </navigation>

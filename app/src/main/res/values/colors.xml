@@ -9,8 +9,8 @@
     <color name="colorError">#b00020</color>
     <color name="colorOnPrimary">#ffffff</color>
     <color name="colorOnSecondary">#ffffff</color>
-    <color name="colorOnBackground">#808080</color>
-    <color name="colorOnSurface">#808080</color>
+    <color name="colorOnBackground">#202020</color>
+    <color name="colorOnSurface">#202020</color>
     <color name="colorOnError">#ffffff</color>
     <color name="colorHeadline">#222455</color>
     <color name="colorSubtitle">#6e7faa</color>
@@ -22,4 +22,5 @@
     <color name="colorSaved">#618ee8</color>
     <color name="colorSavedVariant">#6495ed</color>
     <color name="colorRed">#b00020</color>
+    <color name="colorChipIcon">#808080</color>
 </resources>

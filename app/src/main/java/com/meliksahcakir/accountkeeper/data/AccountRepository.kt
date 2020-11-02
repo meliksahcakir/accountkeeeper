@@ -18,7 +18,9 @@ class AccountRepository(
         remoteDataSource.setUserId(uid)
     }
 
-    suspend fun getAccounts(forceUpdate: Boolean): Result<List<Account>> {
+    fun getUserId() = uid
+
+    suspend fun getAccounts(forceUpdate: Boolean = false): Result<List<Account>> {
         if (forceUpdate) {
             try {
                 updateAccountsFromRemoteDataSource()
@@ -55,7 +57,7 @@ class AccountRepository(
         }
     }
 
-    suspend fun getAccount(accountId: String, forceUpdate: Boolean): Result<Account> {
+    suspend fun getAccount(accountId: String, forceUpdate: Boolean = false): Result<Account> {
         if (forceUpdate) {
             updateAccountFromRemoteDataSource(accountId)
         }

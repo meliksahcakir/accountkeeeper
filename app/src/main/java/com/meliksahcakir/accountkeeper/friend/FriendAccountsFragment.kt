@@ -16,6 +16,7 @@ import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.Account
+import com.meliksahcakir.accountkeeper.personal.PersonalAccountsFragment
 import com.meliksahcakir.accountkeeper.utils.*
 import com.meliksahcakir.accountkeeper.view.AccountAdapterListener
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,6 +27,7 @@ class FriendAccountsFragment : Fragment(), AccountAdapterListener {
 
     companion object {
         fun newInstance() = FriendAccountsFragment()
+        private var ARG_SNACK_BAR_TEXT = "SNACK_BAR_TEXT"
     }
 
     private val viewModel by viewModels<FriendAccountsViewModel> {
@@ -61,16 +63,22 @@ class FriendAccountsFragment : Fragment(), AccountAdapterListener {
                 emptyListTextView.text = getString(R.string.search_not_found)
             }
         }
-        viewModel.snackBarParams.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { params ->
-                showSnackBar(params)
-            }
-        }
+        viewModel.snackBarParams.observe(viewLifecycleOwner, EventObserver {
+            showSnackBar(it)
+        })
         toolbarEditText.afterTextChanged {
             viewModel.updateSearchParameter(it)
         }
 
         setUpNavigation()
+        arguments?.let { args ->
+            val message = args.getString(ARG_SNACK_BAR_TEXT)
+            message?.let {
+                val snackbar = Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT)
+                snackbar.anchorView = (requireActivity() as MainActivity).mainFab
+                snackbar.show()
+            }
+        }
     }
 
     private fun setUpNavigation() {
@@ -118,6 +126,7 @@ class FriendAccountsFragment : Fragment(), AccountAdapterListener {
     private fun showSnackBar(parameters: SnackBarParameters) {
         val snackbar =
             Snackbar.make(requireView(), parameters.messageStringId, Snackbar.LENGTH_SHORT)
+        snackbar.anchorView = (requireActivity() as MainActivity).mainFab
         if (parameters.action != SnackBarAction.NONE) {
             snackbar.setAction(parameters.actionStringId) {
                 when (parameters.action) {
