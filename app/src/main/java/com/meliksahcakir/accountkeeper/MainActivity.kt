@@ -23,28 +23,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         host.navController.addOnDestinationChangedListener(this)
     }
 
-    override fun onBackPressed() {
-        FirebaseAuth.getInstance().signOut()
-        with(host.childFragmentManager.fragments[0]) {
-            if ((this as? ExitWithAnimation)?.isToBeExitedWithAnimation() == true) {
-                if (this.posX == null || this.posY == null) {
-                    onBackPressed()
-                } else {
-                    this.view?.exitCircularReveal(
-                        this.posX!!,
-                        this.posY!!,
-                        requireContext().color(R.color.colorBackground),
-                        requireContext().color(R.color.colorPrimary)
-                    ) {
-                        super.onBackPressed()
-                    } ?: super.onBackPressed()
-                }
-            } else {
-                super.onBackPressed()
-            }
-        }
-    }
-
     override fun onDestinationChanged(
         controller: NavController,
         destination: NavDestination,

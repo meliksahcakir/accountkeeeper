@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -103,21 +104,45 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
         })
         viewModel.accountSaved.observe(viewLifecycleOwner, EventObserver { personal ->
             val message = getString(R.string.account_saved_successfully)
-            if (personal) {
-                val action = AddUpdateAccountFragmentDirections
+            val navDirection = if (personal) {
+                AddUpdateAccountFragmentDirections
                     .actionAddUpdateAccountFragmentToPersonalAccountsFragment(
                         message
                     )
-                findNavController().navigate(action)
             } else {
-                val action = AddUpdateAccountFragmentDirections
+                AddUpdateAccountFragmentDirections
                     .actionAddUpdateAccountFragmentToFriendAccountsFragment(
                         message
                     )
-                findNavController().navigate(action)
+            }
+            if (posX == null || posY == null) {
+                findNavController().navigate(navDirection)
+            } else {
+                view.exitCircularReveal(
+                    posX!!,
+                    posY!!,
+                    requireContext().color(R.color.colorBackground),
+                    requireContext().color(R.color.colorPrimary)
+                ) {
+                    findNavController().navigate(navDirection)
+                }
             }
         })
         viewModel.start(accountId, personal)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (posX == null || posY == null) {
+                findNavController().navigateUp()
+            } else {
+                view.exitCircularReveal(
+                    posX!!,
+                    posY!!,
+                    requireContext().color(R.color.colorBackground),
+                    requireContext().color(R.color.colorPrimary)
+                ) {
+                    findNavController().navigateUp()
+                }
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
