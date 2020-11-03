@@ -21,12 +21,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/account_image"
-            android:src="@drawable/ic_card"
-            app:tint="?attr/colorOnPrimary"
+            android:src="@drawable/ic_account_circle"
             app:layout_constraintBottom_toBottomOf="@id/accountNameTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/accountNameTextView" />
+            app:layout_constraintTop_toTopOf="@id/accountNameTextView"
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             android:id="@+id/accountNameTextView"
@@ -45,13 +45,14 @@
             android:id="@+id/editImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="?attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/copy_to_clipboard"
             android:src="@drawable/ic_edit"
-            app:tint="?attr/colorOnPrimary"            app:layout_constraintBottom_toBottomOf="@id/accountNameTextView"
+            app:layout_constraintBottom_toBottomOf="@id/accountNameTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/accountNameTextView" />
+            app:layout_constraintTop_toTopOf="@id/accountNameTextView"
+            app:tint="?attr/colorOnPrimary" />
 
         <ImageView
             android:id="@+id/accountAddressImageView"
@@ -59,10 +60,11 @@
             android:layout_height="0dp"
             android:contentDescription="@string/wallet_image"
             android:src="@drawable/ic_wallet"
-            app:tint="?attr/colorOnPrimary"            app:layout_constraintBottom_toBottomOf="@id/accountAddressTextView"
+            app:layout_constraintBottom_toBottomOf="@id/accountAddressTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/accountAddressTextView" />
+            app:layout_constraintTop_toTopOf="@id/accountAddressTextView"
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             android:id="@+id/accountAddressTextView"
@@ -83,10 +85,11 @@
             android:layout_height="0dp"
             android:contentDescription="@string/extra"
             android:src="@drawable/ic_description"
-            app:tint="?attr/colorOnPrimary"            app:layout_constraintBottom_toBottomOf="@id/accountDescriptionTextView"
+            app:layout_constraintBottom_toBottomOf="@id/accountDescriptionTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/accountDescriptionTextView" />
+            app:layout_constraintTop_toTopOf="@id/accountDescriptionTextView"
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             android:id="@+id/accountDescriptionTextView"
@@ -106,10 +109,11 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/qr_icon"
-            app:tint="?attr/colorOnPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/accountDescriptionTextView" />
+            app:layout_constraintTop_toBottomOf="@id/accountDescriptionTextView"
+            app:tint="?attr/colorOnPrimary" />
 
         <ImageView
             android:id="@+id/privacyImageView"
@@ -117,9 +121,9 @@
             android:layout_height="20dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_public"
-            app:tint="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@id/qrImageView"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?attr/colorOnPrimary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/copyAddressButton"

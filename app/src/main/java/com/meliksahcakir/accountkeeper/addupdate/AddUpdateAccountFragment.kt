@@ -166,7 +166,7 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
                 else -> Account.OTHER
             }
             val personal = personalChipGroup.checkedChipId == R.id.personalYesChip
-            val global = !personal || privacyChipGroup.checkedChipId == R.id.privacyNoChip
+            val global = personal && privacyChipGroup.checkedChipId == R.id.privacyNoChip
             if (isRequiredFieldsAreAvailable()) {
                 viewModel.saveAccount(name, number, desc, type, personal, global)
             }

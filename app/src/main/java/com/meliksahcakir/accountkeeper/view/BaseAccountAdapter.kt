@@ -59,6 +59,7 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
     private val accountImageView: ImageView by lazy { itemView.accountImageView }
     private val accountNameTextView: TextView by lazy { itemView.accountNameTextView }
     private val accountAddressTextView: TextView by lazy { itemView.accountAddressTextView }
+    private val accountAddressImageView: ImageView by lazy { itemView.accountAddressImageView }
     private val editImageView: ImageView by lazy { itemView.editImageView }
     private val accountLayout: ConstraintLayout by lazy { itemView.accountLayout }
     private val accountDescriptionTextView: TextView by lazy { itemView.accountDescriptionTextView }
@@ -80,9 +81,9 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
             Account.EMAIL -> R.drawable.ic_email
             Account.PHONE -> R.drawable.ic_phone
             Account.LOCATION -> R.drawable.ic_location
-            else -> R.drawable.ic_account_circle
+            else -> R.drawable.ic_help
         }
-        accountImageView.setImageResource(resId)
+        accountAddressImageView.setImageResource(resId)
         accountNameTextView.text = account.accountName
         accountAddressTextView.text = account.accountNumber
         accountDescriptionTextView.text = account.accountDescription
