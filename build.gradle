@@ -16,7 +16,7 @@ buildscript {
         version_appcompat = "1.2.0"
         version_core = "1.3.2"
         version_material = "1.2.1"
-        version_constraint_layout = "2.0.2"
+        version_constraint_layout = "2.0.4"
         version_vector_drawable = "1.1.0"
         version_navigation = '2.3.1'
         version_lifecycle_extensions = "2.2.0"
@@ -25,9 +25,9 @@ buildscript {
         version_room = "2.2.5"
         version_fragment = "1.2.5"
         version_barcodescanner = "1.9.13"
-        version_firebase_analytics = "17.6.0"
+        version_firebase_analytics = "18.0.0"
         version_firebase_ui_auth = "6.2.0"
-        version_firestore_ktx = "21.7.1"
+        version_firestore_ktx = "22.0.0"
         version_timber = "4.7.1"
     }
 
