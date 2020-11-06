@@ -6,10 +6,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.meliksahcakir.accountkeeper.utils.ExitWithAnimation
-import com.meliksahcakir.accountkeeper.utils.color
-import com.meliksahcakir.accountkeeper.utils.exitCircularReveal
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {

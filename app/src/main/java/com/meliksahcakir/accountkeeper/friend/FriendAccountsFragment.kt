@@ -16,7 +16,6 @@ import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.Account
-import com.meliksahcakir.accountkeeper.personal.PersonalAccountsFragment
 import com.meliksahcakir.accountkeeper.utils.*
 import com.meliksahcakir.accountkeeper.view.AccountAdapterListener
 import kotlinx.android.synthetic.main.activity_main.*

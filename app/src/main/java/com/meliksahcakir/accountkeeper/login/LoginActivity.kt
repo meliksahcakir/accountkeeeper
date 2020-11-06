@@ -9,19 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
-import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.utils.Result
 import com.meliksahcakir.accountkeeper.utils.afterTextChanged
 import com.meliksahcakir.accountkeeper.utils.moveCursorToEnd
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class LoginActivity : AppCompatActivity() {
@@ -169,11 +166,6 @@ class LoginActivity : AppCompatActivity() {
         val user = loginViewModel.getUser()
         user?.let {
             Timber.d("uid = ${it.uid}")
-            val repository = (application as AccountKeeperApplication).accountRepository
-            repository.setUserId(user.uid)
-            loginViewModel.viewModelScope.launch {
-                repository.refreshAccounts()
-            }
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

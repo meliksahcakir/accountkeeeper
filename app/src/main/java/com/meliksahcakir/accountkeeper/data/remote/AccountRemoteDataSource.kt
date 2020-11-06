@@ -26,10 +26,12 @@ object AccountRemoteDataSource : IAccountDataSource {
 
     private var uid = ""
         set(value) {
-            observableAccounts.value = null
-            field = value
-            userRef = db.collection("users").document(uid)
-            accountsRef = userRef?.collection("accounts")
+            if(value != field) {
+                observableAccounts.value = null
+                field = value
+                userRef = db.collection("users").document(uid)
+                accountsRef = userRef?.collection("accounts")
+            }
         }
 
     override fun setUserId(uid: String) {
