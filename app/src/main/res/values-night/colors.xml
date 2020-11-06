@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#a2a8ff</color>
-    <color name="colorPrimaryVariant">#bbc0ff</color>
-    <color name="colorSecondary">#a2a8ff</color>
-    <color name="colorSecondaryVariant">#bbc0ff</color>
+    <color name="colorPrimary">#92b4f2</color>
+    <color name="colorPrimaryVariant">#a2bff4</color>
+    <color name="colorSecondary">#92b4f2</color>
+    <color name="colorSecondaryVariant">#a2bff4</color>
     <color name="colorBackground">#121212</color>
     <color name="colorSurface">#202020</color>
     <color name="colorError">#cf6679</color>
@@ -16,11 +16,9 @@
     <color name="colorSubtitle">#6e7faa</color>
     <color name="colorGreen">#4cd964</color>
     <color name="colorYellow">#FFCC00</color>
-    <color name="colorGray">#DFE4ED</color>
-    <color name="colorPersonal">#676ccd</color>
-    <color name="colorPersonalVariant">#7b68ee</color>
+    <color name="colorGray">#606060</color>
+    <color name="colorPersonal">#6495ed</color>
     <color name="colorSaved">#618ee8</color>
-    <color name="colorSavedVariant">#6495ed</color>
     <color name="colorRed">#cf6679</color>
     <color name="colorChipIcon">#DDDDDD</color>
 </resources>

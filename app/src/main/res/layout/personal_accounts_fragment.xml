@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
+            style="@style/MaterialCardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -24,6 +25,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="?attr/colorSurface"
+            app:cardElevation="4dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -32,10 +34,10 @@
                 android:layout_height="40dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:titleTextAppearance="@style/Widget.AppCompat.TextView"
-                app:titleTextColor="?attr/colorPrimary"
-                app:contentInsetStart="0dp">
+                app:titleTextColor="?attr/colorPrimary">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -45,28 +47,28 @@
                         android:id="@+id/toolbarEditText"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:paddingEnd="30dp"
-                        android:paddingStart="15dp"
                         android:background="?attr/colorSurface"
                         android:focusable="true"
+                        android:hint="@string/search_your_personal_accounts"
                         android:imeOptions="actionSearch"
                         android:inputType="text"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="30dp"
                         android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:hint="@string/search_your_personal_accounts"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_search"
-                        app:tint="?attr/colorSecondary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="?attr/colorSecondary" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.MaterialToolbar>
@@ -81,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        tools:itemCount="4"
+        tools:itemCount="5"
         tools:listitem="@layout/account_view" />
 
     <ImageView
@@ -90,11 +92,11 @@
         android:layout_height="140dp"
         android:alpha="0.8"
         android:src="@drawable/ic_wallet"
-        app:tint="@color/colorPersonal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorPersonal" />
 
     <TextView
         android:id="@+id/emptyListTextView"

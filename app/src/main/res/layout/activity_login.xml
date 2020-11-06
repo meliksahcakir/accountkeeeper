@@ -33,16 +33,18 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
         android:background="@drawable/ic_account_keeper"
         android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/emailCardView"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="200dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/subtitleTextView"
+        app:layout_constraintWidth_max="200dp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/emailCardView"
@@ -50,11 +52,11 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -212,8 +214,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_forward"
+        app:layout_constraintBottom_toTopOf="@id/formChangeTextView"
         app:layout_constraintEnd_toEndOf="@id/forgotPasswordTextView"
-        app:layout_constraintTop_toBottomOf="@id/forgotPasswordTextView" />
+        app:layout_constraintTop_toBottomOf="@id/forgotPasswordTextView"
+        app:layout_constraintVertical_bias="0" />
 
     <ProgressBar
         android:id="@+id/loading"

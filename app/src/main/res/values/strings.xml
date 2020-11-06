@@ -50,4 +50,8 @@
     <string name="is_it_going_to_be_private">Is this private account?</string>
     <string name="account_saved_successfully">Account is saved successfully.</string>
     <string name="undo">Undo</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="change_password">Change Password</string>
+    <string name="share_profile">Share Profile</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
