@@ -2,6 +2,8 @@ package com.meliksahcakir.accountkeeper
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -17,6 +19,9 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         host = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         bottomNavigationView.setupWithNavController(host.navController)
         host.navController.addOnDestinationChangedListener(this)
+        (application as AccountKeeperApplication).preferenceRepository.nightMode.observe(this) {
+            AppCompatDelegate.setDefaultNightMode(it)
+        }
     }
 
     override fun onDestinationChanged(

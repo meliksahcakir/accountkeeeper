@@ -18,7 +18,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         viewModel.navigateToNextScreen.observe(this, EventObserver {
