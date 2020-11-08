@@ -4,12 +4,16 @@ import android.content.Intent
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseUser
 import com.meliksahcakir.accountkeeper.R
+import com.meliksahcakir.accountkeeper.data.AccountRepository
 import com.meliksahcakir.accountkeeper.utils.Result
 import com.meliksahcakir.accountkeeper.utils.isEmailValid
 import com.meliksahcakir.accountkeeper.utils.isPasswordValid
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(
+    private val loginRepository: LoginRepository,
+    private val accountRepository: AccountRepository
+) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -87,15 +91,27 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         val visibility = _passwordVisibility.value ?: false
         _passwordVisibility.value = !visibility
     }
+
+    fun initializeUserAccounts() {
+        loginRepository.getUser()?.let {
+            accountRepository.setUserId(it.uid)
+            viewModelScope.launch {
+                accountRepository.refreshAccounts()
+            }
+        }
+    }
 }
 
-class LoginViewModelFactory(private val loginRepository: LoginRepository) :
+class LoginViewModelFactory(
+    private val loginRepository: LoginRepository,
+    private val accountRepository: AccountRepository
+) :
     ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(loginRepository) as T
+            return LoginViewModel(loginRepository, accountRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

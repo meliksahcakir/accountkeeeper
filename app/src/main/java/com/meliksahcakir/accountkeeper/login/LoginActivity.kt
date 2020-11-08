@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.utils.Result
@@ -28,7 +29,10 @@ class LoginActivity : AppCompatActivity() {
     private val GOOGLE_SIGN_IN = 1000
 
     private val loginViewModel by viewModels<LoginViewModel> {
-        LoginViewModelFactory(LoginRepository.getInstance())
+        LoginViewModelFactory(
+            LoginRepository.getInstance(),
+            (application as AccountKeeperApplication).accountRepository
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -166,6 +170,7 @@ class LoginActivity : AppCompatActivity() {
         val user = loginViewModel.getUser()
         user?.let {
             Timber.d("uid = ${it.uid}")
+            loginViewModel.initializeUserAccounts()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
