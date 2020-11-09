@@ -54,4 +54,6 @@
     <string name="change_password">Change Password</string>
     <string name="share_profile">Share Profile</string>
     <string name="sign_out">Sign Out</string>
+    <string name="sync_your_accounts">Sync your accounts</string>
+    <string name="accounts_synced_successfully">Your accounts are up to date.</string>
 </resources>

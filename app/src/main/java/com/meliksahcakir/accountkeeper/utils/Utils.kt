@@ -17,6 +17,7 @@ import android.view.ViewAnimationUtils
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
@@ -24,6 +25,7 @@ import com.meliksahcakir.accountkeeper.R
 import kotlin.math.hypot
 
 fun Context.color(@ColorRes colorResId: Int) = ContextCompat.getColor(this, colorResId)
+fun Context.drawable(@DrawableRes drawableId: Int) = ContextCompat.getDrawable(this, drawableId)
 
 fun isEmailValid(email: String): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(email).matches()

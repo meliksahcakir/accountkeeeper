@@ -106,39 +106,59 @@
 
         <ImageView
             android:id="@+id/qrImageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="5dp"
             android:src="@drawable/qr_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/accountDescriptionTextView"
-            app:tint="?attr/colorOnPrimary" />
+            app:layout_constraintBottom_toBottomOf="@id/copyAddressButton"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/copyAddressButton"
+            app:layout_constraintTop_toTopOf="@id/copyAddressButton"
+            app:tint="?attr/colorOnPrimary"
+            android:elevation="10dp"/>
 
         <ImageView
             android:id="@+id/privacyImageView"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginTop="10dp"
             android:src="@drawable/ic_public"
-            app:layout_constraintBottom_toBottomOf="@id/qrImageView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/copyAddressButton"
+            app:layout_constraintBottom_toBottomOf="@id/copyAddressButton"
+            app:layout_constraintStart_toStartOf="@id/accountAddressImageView"
+            app:layout_constraintEnd_toEndOf="@id/accountAddressImageView"
             app:tint="?attr/colorOnPrimary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/copyAddressButton"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingEnd="50dp"
             android:text="@string/copy_address"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/qrImageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/qrImageView"
+            app:layout_constraintTop_toBottomOf="@id/accountDescriptionImageView"
             app:strokeColor="?attr/colorOnPrimary" />
+
+        <ImageView
+            android:id="@+id/shareImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/copy_to_clipboard"
+            android:src="@drawable/ic_share"
+            app:layout_constraintBottom_toBottomOf="@id/copyAddressButton"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/copyAddressButton"
+            app:tint="?attr/colorOnPrimary" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/descriptionGroup"

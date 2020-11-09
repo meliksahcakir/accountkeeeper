@@ -27,7 +27,7 @@ class SplashViewModel(private val repository: AccountRepository) : ViewModel() {
         val direction: SplashActivityDirections =
             if (user != null) SplashActivityDirections.MAIN_ACTIVITY else SplashActivityDirections.LOGIN_ACTIVITY
         viewModelScope.launch {
-            delay(3000)
+            delay(2000)
             _navigateToNextScreen.postValue(Event(direction))
         }
     }
