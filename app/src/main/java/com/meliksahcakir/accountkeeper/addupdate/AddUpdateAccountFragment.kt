@@ -20,41 +20,25 @@ import com.meliksahcakir.accountkeeper.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_update_account_fragment.*
 
-private const val ARG_EXIT_LOCATION = "exitLocation"
-private const val ARG_ACCOUNT_ID = "accountId"
-private const val ARG_PERSONAL = "personal"
-
 class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(accountId: String, personal: Boolean, exitLocation: IntArray) =
-            AddUpdateAccountFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_ACCOUNT_ID, accountId)
-                    putBoolean(ARG_PERSONAL, personal)
-                    putIntArray(ARG_EXIT_LOCATION, exitLocation)
-                }
-            }
-    }
-
     private val viewModel by viewModels<AddUpdateAccountViewModel> {
-        AddUpdateAccountViewModelFactory((requireContext().applicationContext as AccountKeeperApplication).accountRepository)
+        ViewModelFactory((requireContext().applicationContext as AccountKeeperApplication).accountRepository)
     }
+
     private var accountId = ""
     private var personal = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let { args ->
-            val location = args.getIntArray(ARG_EXIT_LOCATION)
-            location?.let { it ->
-                posX = it[0]
-                posY = it[1]
+        arguments?.let {
+            val args = AddUpdateAccountFragmentArgs.fromBundle(it)
+            args.exitLocation?.let { location ->
+                posX = location[0]
+                posY = location[1]
             }
-            accountId = args.getString(ARG_ACCOUNT_ID, "")
-            personal = args.getBoolean(ARG_PERSONAL, true)
+            accountId = args.accountId ?: ""
+            personal = args.personal
         }
     }
 
@@ -143,10 +127,6 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
                 }
             }
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     private fun setUpNavigation() {

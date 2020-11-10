@@ -43,7 +43,6 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
         accountResult: Result<List<Account>>
     ): LiveData<List<Account>> {
         val result = MutableLiveData<List<Account>>()
-
         if (accountResult is Result.Success) {
             viewModelScope.launch {
                 result.value = filterAccounts(search, accountResult.data)
@@ -84,13 +83,6 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
         }
     }
 
-    /*fun updateAccount(account: Account) {
-        viewModelScope.launch {
-            repository.updateAccount(account)
-            _snackBarParams.value = Event(SnackBarParameters(R.string.account_updated))
-        }
-    }*/
-
     fun deleteAccount(account: Account) {
         viewModelScope.launch {
             repository.deleteAccount(account)
@@ -127,14 +119,5 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
                 e.printStackTrace()
             }
         }
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-class PersonalAccountsViewModelFactory(
-    private val repository: AccountRepository
-) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return (PersonalAccountsViewModel(repository) as T)
     }
 }

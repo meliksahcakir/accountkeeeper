@@ -22,11 +22,12 @@ import com.meliksahcakir.accountkeeper.utils.moveCursorToEnd
 import kotlinx.android.synthetic.main.activity_login.*
 import timber.log.Timber
 
+private const val GOOGLE_SIGN_IN = 1000
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private val GOOGLE_SIGN_IN = 1000
 
     private val loginViewModel by viewModels<LoginViewModel> {
         LoginViewModelFactory(

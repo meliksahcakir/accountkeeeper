@@ -23,16 +23,11 @@ import kotlinx.android.synthetic.main.personal_accounts_fragment.*
 
 class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
 
-    companion object {
-        fun newInstance() = PersonalAccountsFragment()
-        private var ARG_SNACK_BAR_TEXT = "SNACK_BAR_TEXT"
-    }
-
     private val viewModel by viewModels<PersonalAccountsViewModel> {
-        PersonalAccountsViewModelFactory((requireContext().applicationContext as AccountKeeperApplication).accountRepository)
+        ViewModelFactory((requireContext().applicationContext as AccountKeeperApplication).accountRepository)
     }
 
-    private lateinit var personalAccountAdapter: PersonalAccountAdapter
+    private lateinit var mAdapter: PersonalAccountAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,18 +38,17 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        personalAccountAdapter = PersonalAccountAdapter(this)
-        val itemTouchHelper =
-            ItemTouchHelper(SwipeCallbacks(requireContext(), personalAccountAdapter))
+        mAdapter = PersonalAccountAdapter(this)
+        val itemTouchHelper = ItemTouchHelper(SwipeCallbacks(requireContext(), mAdapter))
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = personalAccountAdapter
+            adapter = mAdapter
             itemTouchHelper.attachToRecyclerView(this)
         }
         viewModel.accounts.observe(viewLifecycleOwner) {
             emptyListGroup.isVisible = it.isEmpty()
             recyclerView.isVisible = it.isNotEmpty()
-            personalAccountAdapter.submitList(it)
+            mAdapter.submitList(it)
             if (toolbarEditText.text.toString() == "") {
                 emptyListTextView.text = getString(R.string.no_data_available)
             } else {
@@ -69,10 +63,11 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
         }
 
         setUpNavigation()
-        arguments?.let { args ->
-            val message = args.getString(ARG_SNACK_BAR_TEXT)
-            message?.let {
-                val snackbar = Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT)
+        arguments?.let {
+            val args = PersonalAccountsFragmentArgs.fromBundle(it)
+            val message = args.snackBarText
+            message?.let { str ->
+                val snackbar = Snackbar.make(requireView(), str, Snackbar.LENGTH_SHORT)
                 snackbar.anchorView = (requireActivity() as MainActivity).mainFab
                 snackbar.show()
             }
@@ -104,10 +99,6 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
         mainFab.setOnClickListener {
             viewModel.onAddButtonClicked()
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     override fun onEditButtonClicked(account: Account) {

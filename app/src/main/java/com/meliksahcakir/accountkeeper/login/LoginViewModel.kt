@@ -105,8 +105,7 @@ class LoginViewModel(
 class LoginViewModelFactory(
     private val loginRepository: LoginRepository,
     private val accountRepository: AccountRepository
-) :
-    ViewModelProvider.Factory {
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

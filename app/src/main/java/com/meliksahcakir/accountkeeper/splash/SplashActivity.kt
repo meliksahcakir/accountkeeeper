@@ -9,11 +9,12 @@ import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.login.LoginActivity
 import com.meliksahcakir.accountkeeper.utils.EventObserver
+import com.meliksahcakir.accountkeeper.utils.ViewModelFactory
 
 class SplashActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<SplashViewModel> {
-        SplashViewModelFactory((application as AccountKeeperApplication).accountRepository)
+        ViewModelFactory((application as AccountKeeperApplication).accountRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

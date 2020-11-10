@@ -42,12 +42,3 @@ class SplashViewModel(private val repository: AccountRepository) : ViewModel() {
         }
     }
 }
-
-@Suppress("UNCHECKED_CAST")
-class SplashViewModelFactory(
-    private val repository: AccountRepository
-) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return (SplashViewModel(repository) as T)
-    }
-}

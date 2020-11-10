@@ -26,7 +26,7 @@ object AccountRemoteDataSource : IAccountDataSource {
 
     private var uid = ""
         set(value) {
-            if(value != field) {
+            if (value != field) {
                 observableAccounts.value = null
                 field = value
                 userRef = db.collection("users").document(uid)

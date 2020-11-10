@@ -13,10 +13,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class FindAccountsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = FindAccountsFragment()
-    }
-
     private val viewModel: FindAccountsViewModel by viewModels()
 
     override fun onCreateView(
@@ -39,10 +35,6 @@ class FindAccountsFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     private fun setUpNavigation() {

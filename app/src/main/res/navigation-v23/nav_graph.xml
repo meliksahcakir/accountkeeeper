@@ -23,7 +23,7 @@
                 app:argType="integer[]" />
         </action>
         <argument
-            android:name="SNACK_BAR_TEXT"
+            android:name="snackBarText"
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
@@ -47,7 +47,7 @@
                 app:argType="integer[]" />
         </action>
         <argument
-            android:name="SNACK_BAR_TEXT"
+            android:name="snackBarText"
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
@@ -124,7 +124,7 @@
             app:popUpTo="@id/friendAccountsFragment"
             app:popUpToInclusive="true">
             <argument
-                android:name="SNACK_BAR_TEXT"
+                android:name="snackBarText"
                 android:defaultValue="@null" />
         </action>
         <action
@@ -133,7 +133,7 @@
             app:popUpTo="@id/personalAccountsFragment"
             app:popUpToInclusive="true">
             <argument
-                android:name="SNACK_BAR_TEXT"
+                android:name="snackBarText"
                 android:defaultValue="@null" />
         </action>
     </fragment>

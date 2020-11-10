@@ -1,6 +1,9 @@
 package com.meliksahcakir.accountkeeper.addupdate
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.data.AccountRepository
 import com.meliksahcakir.accountkeeper.utils.Event
@@ -73,14 +76,5 @@ class AddUpdateAccountViewModel(private val repository: AccountRepository) : Vie
                 _accountSaved.value = Event(it.personalAccount)
             }
         }
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-class AddUpdateAccountViewModelFactory(
-    private val repository: AccountRepository
-) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return (AddUpdateAccountViewModel(repository) as T)
     }
 }

@@ -18,18 +18,15 @@ import com.meliksahcakir.accountkeeper.login.LoginActivity
 import com.meliksahcakir.accountkeeper.preference.PreferenceRepository
 import com.meliksahcakir.accountkeeper.utils.EventObserver
 import com.meliksahcakir.accountkeeper.utils.SnackBarParameters
+import com.meliksahcakir.accountkeeper.utils.ViewModelFactory
 import com.meliksahcakir.accountkeeper.utils.drawable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 
 class SettingsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
-
     private val viewModel by viewModels<SettingsViewModel> {
-        SettingsViewModelFactory((requireActivity().application as AccountKeeperApplication).accountRepository)
+        ViewModelFactory((requireActivity().application as AccountKeeperApplication).accountRepository)
     }
     private lateinit var preferenceRepository: PreferenceRepository
 
@@ -72,10 +69,6 @@ class SettingsFragment : Fragment() {
         accountTextView.setOnClickListener {
             viewModel.onShareProfileButtonClicked(requireActivity())
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     private fun setUpNavigation() {

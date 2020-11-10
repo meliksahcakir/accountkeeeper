@@ -121,12 +121,3 @@ class FriendAccountsViewModel(private val repository: AccountRepository) : ViewM
         }
     }
 }
-
-@Suppress("UNCHECKED_CAST")
-class FriendAccountsViewModelFactory(
-    private val repository: AccountRepository
-) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return (FriendAccountsViewModel(repository) as T)
-    }
-}
