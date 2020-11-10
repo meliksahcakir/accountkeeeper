@@ -56,4 +56,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="sync_your_accounts">Sync your accounts</string>
     <string name="accounts_synced_successfully">Your accounts are up to date.</string>
+    <string name="click_the_link_for_available_accounts">Click the link to see my available accounts in Account Keeper.</string>
+    <string name="share_with">Share with</string>
+    <string name="click_the_link_for_details">Click the below link to see the account details in Account Keeper.</string>
 </resources>

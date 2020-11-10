@@ -62,6 +62,7 @@ dependencies {
     implementation "com.google.firebase:firebase-analytics:$version_firebase_analytics"
     implementation "com.firebaseui:firebase-ui-auth:$version_firebase_ui_auth"
     implementation "com.google.firebase:firebase-firestore-ktx:$version_firestore_ktx"
+    implementation "com.google.firebase:firebase-dynamic-links-ktx:$version_firebase_dynamic_links_ktx"
     implementation "com.jakewharton.timber:timber:$version_timber"
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test.ext:junit:1.1.2"

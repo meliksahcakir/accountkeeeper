@@ -2,13 +2,12 @@ package com.meliksahcakir.accountkeeper.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.meliksahcakir.accountkeeper.AccountKeeperApplication
+import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.login.LoginActivity
-import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.utils.EventObserver
 
 class SplashActivity : AppCompatActivity() {

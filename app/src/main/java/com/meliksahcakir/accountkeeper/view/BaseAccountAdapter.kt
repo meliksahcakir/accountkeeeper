@@ -67,6 +67,7 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
     private val qrImageView: ImageView by lazy { itemView.qrImageView }
     private val privacyImageView: ImageView by lazy { itemView.privacyImageView }
     private val copyAddressButton: MaterialButton by lazy { itemView.copyAddressButton }
+    private val shareImageView: ImageView by lazy { itemView.shareImageView }
 
     private val writer = QRCodeWriter()
 
@@ -97,6 +98,9 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
         }
         editImageView.setOnClickListener {
             listener.onEditButtonClicked(account)
+        }
+        shareImageView.setOnClickListener {
+            listener.onShareAccount(account)
         }
     }
 

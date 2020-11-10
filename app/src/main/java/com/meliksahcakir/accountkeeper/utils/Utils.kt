@@ -9,6 +9,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
@@ -21,6 +22,10 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import com.google.firebase.dynamiclinks.ktx.androidParameters
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.shortLinkAsync
+import com.google.firebase.ktx.Firebase
 import com.meliksahcakir.accountkeeper.R
 import kotlin.math.hypot
 
@@ -73,7 +78,7 @@ fun Context.share(text: String) {
         putExtra(Intent.EXTRA_TEXT, text)
         type = "text/plain"
     }
-    val shareIntent = Intent.createChooser(sendIntent, null)
+    val shareIntent = Intent.createChooser(sendIntent, getString(R.string.share_with))
     startActivity(shareIntent)
 }
 
@@ -146,6 +151,24 @@ fun View.findLocationOfCenterOnTheScreen(): IntArray {
     return positions
 }
 
-fun EditText.moveCursorToEnd(){
+fun EditText.moveCursorToEnd() {
     setSelection(text.length)
 }
+
+fun createDynamicLinkForTheAccountList(userId: String) =
+    Firebase.dynamicLinks.shortLinkAsync {
+        link = Uri.parse("https://accountkeeper.info/?userId=$userId")
+        domainUriPrefix = "https://accountkeeper.page.link"
+        androidParameters("com.meliksahcakir.accountkeeper") {
+
+        }
+    }
+
+fun createDynamicLinkForTheAccount(userId: String, accountId: String) =
+    Firebase.dynamicLinks.shortLinkAsync {
+        link = Uri.parse("https://accountkeeper.info/?userId=$userId&accountId=$accountId")
+        domainUriPrefix = "https://accountkeeper.page.link"
+        androidParameters("com.meliksahcakir.accountkeeper") {
+
+        }
+    }

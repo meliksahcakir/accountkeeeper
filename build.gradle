@@ -28,6 +28,7 @@ buildscript {
         version_firebase_analytics = "18.0.0"
         version_firebase_ui_auth = "6.2.0"
         version_firestore_ktx = "22.0.0"
+        version_firebase_dynamic_links_ktx = "19.1.1"
         version_timber = "4.7.1"
     }
 

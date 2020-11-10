@@ -115,6 +115,7 @@ class PersonalAccountsFragment : Fragment(), AccountAdapterListener {
     }
 
     override fun onShareAccount(account: Account) {
+        viewModel.onShareButtonClicked(requireActivity(), account)
     }
 
     override fun onDeleteAccount(account: Account) {

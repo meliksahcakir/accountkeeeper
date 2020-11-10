@@ -2,6 +2,7 @@ package com.meliksahcakir.accountkeeper
 
 import android.app.Application
 import android.content.Context
+import android.net.Uri
 import androidx.appcompat.app.AppCompatDelegate
 import com.meliksahcakir.accountkeeper.data.AccountRepository
 import com.meliksahcakir.accountkeeper.preference.PreferenceRepository
@@ -17,6 +18,8 @@ class AccountKeeperApplication : Application() {
     lateinit var accountRepository: AccountRepository
     lateinit var preferenceRepository: PreferenceRepository
         private set
+
+    var unhandledDeepLink: Uri? = null
 
     override fun onCreate() {
         super.onCreate()

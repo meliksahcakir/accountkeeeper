@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.friend_accounts_fragment.*
 
 class FriendAccountsFragment : Fragment(), AccountAdapterListener {
 
-
     companion object {
         fun newInstance() = FriendAccountsFragment()
         private var ARG_SNACK_BAR_TEXT = "SNACK_BAR_TEXT"
@@ -116,6 +115,7 @@ class FriendAccountsFragment : Fragment(), AccountAdapterListener {
     }
 
     override fun onShareAccount(account: Account) {
+        viewModel.onShareButtonClicked(requireActivity(), account)
     }
 
     override fun onDeleteAccount(account: Account) {

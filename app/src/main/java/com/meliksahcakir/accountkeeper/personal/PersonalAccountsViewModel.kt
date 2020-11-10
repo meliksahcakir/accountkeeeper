@@ -1,14 +1,13 @@
 package com.meliksahcakir.accountkeeper.personal
 
+import android.content.Context
 import androidx.lifecycle.*
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.data.AccountRepository
-import com.meliksahcakir.accountkeeper.utils.Event
-import com.meliksahcakir.accountkeeper.utils.Result
-import com.meliksahcakir.accountkeeper.utils.SnackBarAction
-import com.meliksahcakir.accountkeeper.utils.SnackBarParameters
+import com.meliksahcakir.accountkeeper.utils.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -110,6 +109,23 @@ class PersonalAccountsViewModel(private val repository: AccountRepository) : Vie
     fun updateSearchParameter(search: String) {
         if (_searchText.value != search) {
             _searchText.value = search
+        }
+    }
+
+    fun onShareButtonClicked(activityContext: Context, account: Account) {
+        viewModelScope.launch {
+            try {
+                val link = createDynamicLinkForTheAccount(
+                    repository.getUserId(),
+                    account.accountId
+                ).await()
+                val uriString = link.shortLink.toString()
+                val message =
+                    activityContext.getString(R.string.click_the_link_for_details) + "\n" + uriString
+                activityContext.share(message)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

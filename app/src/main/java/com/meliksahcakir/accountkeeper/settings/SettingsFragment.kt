@@ -69,6 +69,9 @@ class SettingsFragment : Fragment() {
         syncTextView.setOnClickListener {
             viewModel.onSyncButtonClicked()
         }
+        accountTextView.setOnClickListener {
+            viewModel.onShareProfileButtonClicked(requireActivity())
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
