@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
+import com.meliksahcakir.accountkeeper.utils.EventObserver
 import com.meliksahcakir.accountkeeper.utils.Result
 import com.meliksahcakir.accountkeeper.utils.afterTextChanged
 import com.meliksahcakir.accountkeeper.utils.moveCursorToEnd
@@ -44,10 +45,12 @@ class LoginActivity : AppCompatActivity() {
             if (loginViewModel.isLoginPage()) {
                 formChangeTextView.setText(R.string.don_t_you_have_an_account_create)
                 signInTextView.text = getString(R.string.sign_in)
+                userNameCardView.isVisible = false
                 forgotPasswordTextView.isVisible = true
             } else {
                 formChangeTextView.setText(R.string.i_have_an_account)
                 signInTextView.text = getString(R.string.sign_up)
+                userNameCardView.isVisible = true
                 forgotPasswordTextView.isInvisible = true
             }
         }
@@ -66,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            onUserAcquired()
+            onUserAcquired(true)
         }
 
         loginViewModel.passwordVisibility.observe(this) {
@@ -79,6 +82,11 @@ class LoginActivity : AppCompatActivity() {
             }
             passwordEditText.moveCursorToEnd()
         }
+
+        loginViewModel.navigateToMainActivity.observe(this, EventObserver {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        })
 
         formChangeTextView.setOnClickListener {
             loginViewModel.onLoginPageChanged()
@@ -93,6 +101,10 @@ class LoginActivity : AppCompatActivity() {
             updatePasswordErrorStatus("")
             onDataChanged()
         }
+        userNameEditText.afterTextChanged {
+            updateUserNameErrorStatus("")
+            onDataChanged()
+        }
 
         signInFab.setOnClickListener {
             loginViewModel.loginFormState.value?.let {
@@ -103,7 +115,8 @@ class LoginActivity : AppCompatActivity() {
                     if (loginViewModel.isLoginPage()) {
                         loginViewModel.login(email, password)
                     } else {
-                        loginViewModel.signUp(email, password)
+                        val userName = userNameEditText.text?.toString() ?: ""
+                        loginViewModel.signUp(email, password, userName)
                     }
                 } else {
                     showErrors(it)
@@ -145,6 +158,9 @@ class LoginActivity : AppCompatActivity() {
         if (loginState.resetPasswordStatus != null) {
             Toast.makeText(this, loginState.resetPasswordStatus, Toast.LENGTH_SHORT).show()
         }
+        if (loginState.userNameError != null) {
+            updateUserNameErrorStatus(getString(R.string.required_field))
+        }
     }
 
     private fun googleSignIn() {
@@ -167,20 +183,19 @@ class LoginActivity : AppCompatActivity() {
         onUserAcquired()
     }
 
-    private fun onUserAcquired() {
+    private fun onUserAcquired(userRequested: Boolean = false) {
         val user = loginViewModel.getUser()
         user?.let {
             Timber.d("uid = ${it.uid}")
-            loginViewModel.initializeUserAccounts()
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            loginViewModel.initializeUserAccounts(userRequested)
         }
     }
 
     private fun onDataChanged() {
         loginViewModel.onUserInfoChanged(
             emailEditText.text.toString(),
-            passwordEditText.text.toString()
+            passwordEditText.text.toString(),
+            userNameEditText.text.toString()
         )
     }
 
@@ -202,5 +217,11 @@ class LoginActivity : AppCompatActivity() {
         passwordToggleImageView.isVisible = error == ""
         passwordErrorTextView.isInvisible = error == ""
         passwordErrorTextView.text = error
+    }
+
+    private fun updateUserNameErrorStatus(error: String) {
+        userNameErrorImageView.isVisible = error != ""
+        userNameErrorTextView.isInvisible = error == ""
+        userNameErrorTextView.text = error
     }
 }

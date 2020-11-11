@@ -5,9 +5,8 @@ import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseUser
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.AccountRepository
-import com.meliksahcakir.accountkeeper.utils.Result
-import com.meliksahcakir.accountkeeper.utils.isEmailValid
-import com.meliksahcakir.accountkeeper.utils.isPasswordValid
+import com.meliksahcakir.accountkeeper.data.UserInfo
+import com.meliksahcakir.accountkeeper.utils.*
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -27,6 +26,12 @@ class LoginViewModel(
     private val _passwordVisibility = MutableLiveData<Boolean>(false)
     val passwordVisibility: LiveData<Boolean> = _passwordVisibility
 
+    private var signedInWithGoogle = false
+    private var userInfo: UserInfo? = null
+
+    private val _navigateToMainActivity = MutableLiveData<Event<Unit>>()
+    val navigateToMainActivity: LiveData<Event<Unit>> = _navigateToMainActivity
+
     fun onLoginPageChanged() {
         _loginPage.value = _loginPage.value != true
     }
@@ -36,34 +41,52 @@ class LoginViewModel(
     }
 
     fun login(email: String, password: String) {
+        userInfo = null
         viewModelScope.launch {
             val result = loginRepository.login(email, password)
             _loginResult.value = result
+            signedInWithGoogle = false
         }
     }
 
     fun login(data: Intent) {
+        userInfo = null
         viewModelScope.launch {
             val result = loginRepository.login(data)
             _loginResult.value = result
+            signedInWithGoogle = true
         }
     }
 
-    fun signUp(email: String, password: String) {
+    fun signUp(email: String, password: String, userName: String) {
+        userInfo =
+            UserInfo(userName, email, "")
         viewModelScope.launch {
             val result = loginRepository.signUp(email, password)
             _loginResult.value = result
+            signedInWithGoogle = false
         }
     }
 
-    fun onUserInfoChanged(email: String, password: String) {
+    fun onUserInfoChanged(email: String, password: String, userName: String) {
+        var valid = true
+        var emailError: Int? = null
+        var passwordError: Int? = null
+        var userNameError: Int? = null
+
         if (!isEmailValid(email)) {
-            _loginForm.value = LoginFormState(emailError = R.string.invalid_email)
-        } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
-        } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
+            emailError = R.string.invalid_email
+            valid = false
         }
+        if (!isPasswordValid(password)) {
+            passwordError = R.string.invalid_password
+            valid = false
+        }
+        if (!isLoginPage() && userName == "") {
+            userNameError = R.string.required_field
+            valid = false
+        }
+        _loginForm.value = LoginFormState(emailError, passwordError, null, userNameError, valid)
     }
 
     fun onForgotPasswordClicked(email: String) {
@@ -92,11 +115,46 @@ class LoginViewModel(
         _passwordVisibility.value = !visibility
     }
 
-    fun initializeUserAccounts() {
+    fun initializeUserAccounts(userRequested: Boolean = false) {
         loginRepository.getUser()?.let {
             accountRepository.setUserId(it.uid)
             viewModelScope.launch {
+                if (userRequested) {
+                    if (signedInWithGoogle) {
+                        val name = it.providerData[0].displayName ?: ""
+                        val email = it.providerData[0].email ?: ""
+                        userInfo = UserInfo(
+                            name,
+                            email,
+                            ""
+                        )
+                    }
+                    userInfo?.let { user ->
+                        Preferences.userName = user.username
+                        Preferences.userEmail = user.email
+                        accountRepository.updateRemoteUserInfo(user)
+                    }
+                } else {
+                    val result = accountRepository.getRemoteUserInfo()
+                    if (result is Result.Success) {
+                        val user = result.data
+                        if (user.username != "") {
+                            Preferences.userName = user.username
+                        }
+                        if (user.email != "") {
+                            Preferences.userEmail = user.email
+                        }
+                    } else {
+                        if (it.displayName != null && it.displayName != "") {
+                            Preferences.userName = it.displayName!!
+                        }
+                        if (it.email != null && it.email != "") {
+                            Preferences.userEmail = it.email!!
+                        }
+                    }
+                }
                 accountRepository.refreshAccounts()
+                _navigateToMainActivity.value = Event(Unit)
             }
         }
     }

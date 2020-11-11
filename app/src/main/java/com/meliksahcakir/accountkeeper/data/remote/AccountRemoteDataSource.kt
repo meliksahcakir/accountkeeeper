@@ -7,6 +7,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.meliksahcakir.accountkeeper.data.UserInfo
 import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.data.IAccountDataSource
 import com.meliksahcakir.accountkeeper.utils.Result
@@ -167,6 +168,45 @@ object AccountRemoteDataSource : IAccountDataSource {
                 }
             } catch (e: Exception) {
                 0
+            }
+        }
+    }
+
+    override suspend fun updateRemoteUserInfo(userInfo: UserInfo) {
+        withContext(Dispatchers.IO) {
+            userRef?.set(userInfo)?.await()
+        }
+    }
+
+    override suspend fun getRemoteUserInfo(): Result<UserInfo> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val snapshot = userRef?.get()?.await()
+                val userInfo = snapshot?.toObject(UserInfo::class.java)
+                if (userInfo != null) {
+                    Result.Success(userInfo)
+                } else {
+                    Result.Error(Exception("Cannot retrieve user Info"))
+                }
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+    }
+
+    override suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val snapshot = db.collection("users").get().await()
+                if (snapshot != null) {
+                    val documents = snapshot.documents
+                    val list = documents.mapNotNull { it.toObject(UserInfo::class.java) }
+                    Result.Success(list)
+                } else {
+                    Result.Error(Exception("Cannot retrieve users"))
+                }
+            } catch (e: Exception) {
+                Result.Error(e)
             }
         }
     }

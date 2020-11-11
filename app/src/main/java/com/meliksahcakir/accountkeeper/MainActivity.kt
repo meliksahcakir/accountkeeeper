@@ -1,11 +1,11 @@
 package com.meliksahcakir.accountkeeper
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -13,10 +13,19 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.meliksahcakir.accountkeeper.login.LoginActivity
+import com.meliksahcakir.accountkeeper.utils.PREF_NIGHT_MODE
+import com.meliksahcakir.accountkeeper.utils.Preferences
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+
+    private val sharedPreferenceListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+            if (key == PREF_NIGHT_MODE) {
+                AppCompatDelegate.setDefaultNightMode(Preferences.nightMode)
+            }
+        }
 
     private lateinit var host: NavHostFragment
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +34,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         host = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         bottomNavigationView.setupWithNavController(host.navController)
         host.navController.addOnDestinationChangedListener(this)
-        (application as AccountKeeperApplication).preferenceRepository.nightMode.observe(this) {
-            AppCompatDelegate.setDefaultNightMode(it)
-        }
+        Preferences.preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceListener)
         if (intent != null) {
             handleDeepLinkIntent(intent)
         }
@@ -80,6 +87,11 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 host.navController.safeNavigateToDeepLink(it)
             }
         }
+    }
+
+    override fun onDestroy() {
+        Preferences.preferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceListener)
+        super.onDestroy()
     }
 }
 

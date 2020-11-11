@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.data.IAccountDataSource
+import com.meliksahcakir.accountkeeper.data.UserInfo
 import com.meliksahcakir.accountkeeper.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -97,5 +98,17 @@ class AccountLocalDataSource internal constructor(
         return withContext(ioDispatcher) {
             accountDao.deleteSavedAccounts(uid)
         }
+    }
+
+    override suspend fun updateRemoteUserInfo(userInfo: UserInfo) {
+
+    }
+
+    override suspend fun getRemoteUserInfo(): Result<UserInfo> {
+        return Result.Error(Exception("RemoteDataSource should be used"))
+    }
+
+    override suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>> {
+        return Result.Error(Exception("RemoteDataSource should be used"))
     }
 }

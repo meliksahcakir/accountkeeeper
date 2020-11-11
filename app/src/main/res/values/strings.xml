@@ -59,4 +59,6 @@
     <string name="click_the_link_for_available_accounts">Click the link to see my available accounts in Account Keeper.</string>
     <string name="share_with">Share with</string>
     <string name="click_the_link_for_details">Click the below link to see the account details in Account Keeper.</string>
+    <string name="prompt_name_surname">Name Surname</string>
+    <string name="required_field">Required field</string>
 </resources>

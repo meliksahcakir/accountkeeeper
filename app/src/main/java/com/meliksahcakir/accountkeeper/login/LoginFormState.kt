@@ -7,5 +7,6 @@ data class LoginFormState(
     val emailError: Int? = null,
     val passwordError: Int? = null,
     val resetPasswordStatus: Int? = null,
+    val userNameError: Int? = null,
     val isDataValid: Boolean = false
 )

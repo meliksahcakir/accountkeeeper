@@ -28,4 +28,10 @@ interface IAccountDataSource {
     suspend fun deletePersonalAccounts(): Int
 
     suspend fun deleteSavedAccounts(): Int
+
+    suspend fun updateRemoteUserInfo(userInfo: UserInfo)
+
+    suspend fun getRemoteUserInfo(): Result<UserInfo>
+
+    suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>>
 }

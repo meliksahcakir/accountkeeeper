@@ -50,7 +50,7 @@
         android:id="@+id/emailCardView"
         style="@style/MaterialCardViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -92,7 +92,7 @@
                 android:id="@+id/emailErrorImageView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/ic_error"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -119,7 +119,7 @@
         android:id="@+id/passwordCardView"
         style="@style/MaterialCardViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="55dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
@@ -196,6 +196,75 @@
         app:layout_constraintStart_toStartOf="@id/passwordCardView"
         app:layout_constraintTop_toBottomOf="@id/passwordCardView" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/userNameCardView"
+        style="@style/MaterialCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordErrorTextView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/userNameEditText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?attr/colorSurface"
+                android:focusable="true"
+                android:hint="@string/prompt_name_surname"
+                android:inputType="textPersonName"
+                android:paddingStart="45dp"
+                android:paddingEnd="45dp"
+                android:textAppearance="@style/TextAppearance.MyTheme.Subtitle1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_account_circle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorSecondary" />
+
+            <ImageView
+                android:id="@+id/userNameErrorImageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_error"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorError" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/userNameErrorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/required_field"
+        android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+        android:textColor="?attr/colorError"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/userNameCardView"
+        app:layout_constraintTop_toBottomOf="@id/userNameCardView" />
+
     <TextView
         android:id="@+id/forgotPasswordTextView"
         android:layout_width="wrap_content"
@@ -205,14 +274,14 @@
         android:text="@string/forgot_your_password"
         android:textAppearance="@style/TextAppearance.MyTheme.Subtitle2"
         app:layout_constraintEnd_toEndOf="@id/passwordCardView"
-        app:layout_constraintTop_toBottomOf="@+id/passwordErrorTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameErrorTextView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/signInFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/ic_forward"
         app:layout_constraintBottom_toTopOf="@id/formChangeTextView"
         app:layout_constraintEnd_toEndOf="@id/forgotPasswordTextView"

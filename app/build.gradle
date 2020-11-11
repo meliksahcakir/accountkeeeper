@@ -64,6 +64,7 @@ dependencies {
     implementation "com.google.firebase:firebase-firestore-ktx:$version_firestore_ktx"
     implementation "com.google.firebase:firebase-dynamic-links-ktx:$version_firebase_dynamic_links_ktx"
     implementation "com.jakewharton.timber:timber:$version_timber"
+    implementation "com.chibatching.kotpref:kotpref:$version_kotpref"
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test.ext:junit:1.1.2"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"

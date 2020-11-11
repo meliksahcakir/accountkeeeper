@@ -14,7 +14,7 @@
             android:id="@+id/profileCardView"
             style="@style/ProfileCardViewStyle"
             android:layout_width="0dp"
-            android:layout_height="160dp"
+            android:layout_height="180dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,19 @@
             app:layout_constraintTop_toTopOf="@id/profileCardView" />
 
         <TextView
+            android:id="@+id/profileUserNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+            android:textColor="@color/colorOnSurface"
+            app:layout_constraintBottom_toTopOf="@id/profileEmailTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileImageView"
+            tools:text="Meliksah Cakir" />
+
+        <TextView
             android:id="@+id/profileEmailTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="@id/profileCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileImageView"
+            app:layout_constraintTop_toBottomOf="@id/profileUserNameTextView"
             tools:text="accountkeeper@gmail.com" />
 
         <com.google.android.material.card.MaterialCardView

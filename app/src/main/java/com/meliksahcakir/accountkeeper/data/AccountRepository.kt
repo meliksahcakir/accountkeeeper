@@ -117,4 +117,22 @@ class AccountRepository(
             }
         }
     }
+
+    suspend fun updateRemoteUserInfo(userInfo: UserInfo) {
+        withContext(Dispatchers.IO) {
+            remoteDataSource.updateRemoteUserInfo(userInfo)
+        }
+    }
+
+    suspend fun getRemoteUserInfo(): Result<UserInfo> {
+        return withContext(Dispatchers.IO) {
+            remoteDataSource.getRemoteUserInfo()
+        }
+    }
+
+    suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>> {
+        return withContext(Dispatchers.IO) {
+            remoteDataSource.getRemoteUserList(userName)
+        }
+    }
 }
