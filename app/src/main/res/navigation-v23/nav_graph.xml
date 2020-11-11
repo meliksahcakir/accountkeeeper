@@ -97,7 +97,7 @@
         android:id="@+id/settingsFragment"
         android:name="com.meliksahcakir.accountkeeper.settings.SettingsFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment">
+        tools:layout="@layout/settings_fragment">
 
     </fragment>
     <fragment

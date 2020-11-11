@@ -16,7 +16,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="don_t_you_have_an_account_create">Don\'t you have an account? Create</string>
     <string name="i_have_an_account">I have an account</string>
-    <string name="password_reset_email_sent">Password reset link was sent your email address</string>
+    <string name="password_reset_email_sent">Password reset link was sent to your email address</string>
     <string name="password_reset_email_error">Error occurred while sending email</string>
     <string name="new_account_added">A new account is added.</string>
     <string name="account_updated">The account is updated.</string>

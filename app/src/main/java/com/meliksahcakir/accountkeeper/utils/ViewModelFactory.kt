@@ -20,8 +20,6 @@ class ViewModelFactory(private val repository: AccountRepository) :
                     PersonalAccountsViewModel(repository)
                 isAssignableFrom(FriendAccountsViewModel::class.java) ->
                     FriendAccountsViewModel(repository)
-                isAssignableFrom(SettingsViewModel::class.java) ->
-                    SettingsViewModel(repository)
                 isAssignableFrom(SplashViewModel::class.java) ->
                     SplashViewModel(repository)
                 isAssignableFrom(AddUpdateAccountViewModel::class.java) ->
