@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
@@ -53,21 +53,23 @@ class SettingsFragment : Fragment() {
             requireActivity().finish()
         })
         viewModel.syncBusy.observe(viewLifecycleOwner) {
-            val drawable = if (!it) context?.drawable(R.drawable.ic_arrow_right) else null
-            syncTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawable, null)
-            syncProgressBar.isVisible = it
+            syncCardView.busy = it
         }
         viewModel.snackBarParams.observe(viewLifecycleOwner, EventObserver {
             showSnackBar(it)
         })
-        signOutTextView.setOnClickListener {
+        profileEmailTextView.text = FirebaseAuth.getInstance().currentUser?.email
+        signOutCardView.setOnClickListener {
             viewModel.onSignOutButtonClicked()
         }
-        syncTextView.setOnClickListener {
+        syncCardView.setOnClickListener {
             viewModel.onSyncButtonClicked()
         }
-        accountTextView.setOnClickListener {
+        shareProfileCardView.setOnClickListener {
             viewModel.onShareProfileButtonClicked(requireActivity())
+        }
+        changePasswordCardView.setOnClickListener {
+
         }
     }
 

@@ -12,7 +12,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/profileCardView"
-            style="@style/SettingsCardViewStyle"
+            style="@style/ProfileCardViewStyle"
             android:layout_width="0dp"
             android:layout_height="160dp"
             android:layout_marginTop="20dp"
@@ -36,17 +36,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="20dp"
-            android:text="accountkeeper@gmail.com"
             android:textAppearance="@style/TextAppearance.MyTheme.Body1"
             android:textColor="@color/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="@id/profileCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileImageView" />
+            app:layout_constraintTop_toBottomOf="@id/profileImageView"
+            tools:text="accountkeeper@gmail.com" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/settingsCardView"
-            style="@style/SettingsCardViewStyle"
+            style="@style/ProfileCardViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -73,7 +73,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="10dp"
                     android:text="@string/dark_theme"
                     android:textAppearance="@style/TextAppearance.MyTheme.Body1"
                     app:layout_constraintBottom_toBottomOf="@id/themeImageView"
@@ -91,127 +91,70 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/darkThemeSwitch" />
 
-                <ImageView
-                    android:id="@+id/accountImageView"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_account_circle"
+                <com.meliksahcakir.accountkeeper.view.SettingsCardView
+                    android:id="@+id/shareProfileCardView"
+                    style="@style/SettingsCardViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view1"
-                    app:tint="?attr/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/accountTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableEnd="@drawable/ic_share"
-                    android:gravity="center_vertical"
-                    android:text="@string/share_profile"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"
-                    android:textColor="@color/colorOnSurface"
-                    app:drawableTint="?attr/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@id/accountImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/accountImageView"
-                    app:layout_constraintTop_toTopOf="@id/accountImageView" />
+                    app:scvDrawableEnd="@drawable/ic_share"
+                    app:scvDrawableStart="@drawable/ic_account_circle"
+                    app:scvText="@string/share_profile" />
 
                 <View
                     android:id="@+id/view2"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginStart="10dp"
                     android:background="@color/colorGray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/accountTextView" />
+                    app:layout_constraintTop_toBottomOf="@id/shareProfileCardView" />
 
-                <ImageView
-                    android:id="@+id/passwordImageView"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_private"
+                <com.meliksahcakir.accountkeeper.view.SettingsCardView
+                    android:id="@+id/changePasswordCardView"
+                    style="@style/SettingsCardViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view2"
-                    app:tint="?attr/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/changePasswordTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableEnd="@drawable/ic_arrow_right"
-                    android:gravity="center_vertical"
-                    android:text="@string/change_password"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"
-                    android:textColor="@color/colorOnSurface"
-                    app:drawableTint="?attr/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@id/passwordImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/passwordImageView"
-                    app:layout_constraintTop_toTopOf="@id/passwordImageView" />
+                    app:scvDrawableEnd="@drawable/ic_arrow_right"
+                    app:scvDrawableStart="@drawable/ic_private"
+                    app:scvText="@string/change_password" />
 
                 <View
                     android:id="@+id/view3"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@color/colorGray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/changePasswordTextView" />
+                    app:layout_constraintTop_toBottomOf="@id/changePasswordCardView" />
 
-                <ImageView
-                    android:id="@+id/syncImageView"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_sync"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <com.meliksahcakir.accountkeeper.view.SettingsCardView
+                    android:id="@+id/syncCardView"
+                    style="@style/SettingsCardViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view3"
-                    app:tint="?attr/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/syncTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableEnd="@drawable/ic_arrow_right"
-                    android:gravity="center_vertical"
-                    android:text="@string/sync_your_accounts"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"
-                    android:textColor="@color/colorOnSurface"
-                    app:drawableTint="?attr/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@id/syncImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/syncImageView"
-                    app:layout_constraintTop_toTopOf="@id/syncImageView" />
-
-                <ProgressBar
-                    android:id="@+id/syncProgressBar"
-                    android:layout_width="30dp"
-                    android:layout_height="0dp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/syncTextView"
-                    app:layout_constraintEnd_toEndOf="@id/syncTextView"
-                    app:layout_constraintTop_toTopOf="@id/syncTextView" />
+                    app:scvDrawableEnd="@drawable/ic_arrow_right"
+                    app:scvDrawableStart="@drawable/ic_sync"
+                    app:scvText="@string/sync_your_accounts" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <com.meliksahcakir.accountkeeper.view.SettingsCardView
             android:id="@+id/signOutCardView"
-            style="@style/SettingsCardViewStyle"
+            style="@style/ProfileCardViewStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -219,45 +162,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/settingsCardView">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/signOutImageView"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_sign_out"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="?attr/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/signOutTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:drawableEnd="@drawable/ic_arrow_right"
-                    android:gravity="center_vertical"
-                    android:text="@string/sign_out"
-                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"
-                    android:textColor="@color/colorOnSurface"
-                    app:drawableTint="?attr/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@id/signOutImageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/signOutImageView"
-                    app:layout_constraintTop_toTopOf="@id/signOutImageView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
+            app:layout_constraintTop_toBottomOf="@id/settingsCardView"
+            app:scvDrawableEnd="@drawable/ic_arrow_right"
+            app:scvDrawableStart="@drawable/ic_sign_out"
+            app:scvText="@string/sign_out" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

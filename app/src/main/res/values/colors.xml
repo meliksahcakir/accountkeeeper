@@ -17,8 +17,8 @@
     <color name="colorGreen">#4cd964</color>
     <color name="colorYellow">#FFCC00</color>
     <color name="colorGray">#DFE4ED</color>
-    <color name="colorPersonal">#6495ed</color>
-    <color name="colorSaved">#618ee8</color>
+    <color name="colorPersonal">#5289eb</color>
+    <color name="colorSaved">#417de9</color>
     <color name="colorRed">#b00020</color>
     <color name="colorChipIcon">#808080</color>
 </resources>

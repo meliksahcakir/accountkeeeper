@@ -58,9 +58,13 @@
         <item name="cardCornerRadius">8dp</item>
         <item name="cardElevation">8dp</item>
     </style>
-    <style name="SettingsCardViewStyle" parent="Widget.MaterialComponents.CardView">
+    <style name="ProfileCardViewStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">0dp</item>
         <item name="cardElevation">8dp</item>
+    </style>
+    <style name="SettingsCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardElevation">0dp</item>
     </style>
     <style name="ChoiceChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="android:checkable">true</item>
