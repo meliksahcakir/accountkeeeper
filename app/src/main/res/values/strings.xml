@@ -61,4 +61,8 @@
     <string name="click_the_link_for_details">Click the below link to see the account details in Account Keeper.</string>
     <string name="prompt_name_surname">Name Surname</string>
     <string name="required_field">Required field</string>
+    <string name="save">Save</string>
+    <string name="editbutton">editButton</string>
+    <string name="check_your_network_status">Check your network status.</string>
+    <string name="your_user_name_has_been_updated">Your username has been updated successfully.</string>
 </resources>

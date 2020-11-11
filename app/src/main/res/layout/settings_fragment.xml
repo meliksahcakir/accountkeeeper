@@ -14,48 +14,105 @@
             android:id="@+id/profileCardView"
             style="@style/ProfileCardViewStyle"
             android:layout_width="0dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/profileImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:elevation="20dp"
-            android:src="@drawable/ic_account_keeper"
-            app:layout_constraintBottom_toTopOf="@id/profileEmailTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/profileCardView" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/profileUserNameTextView"
+                <ImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="20dp"
+                    android:elevation="20dp"
+                    android:src="@drawable/ic_account_keeper"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.meliksahcakir.accountkeeper.view.SettingsCardView
+                    android:id="@+id/userNameCardView"
+                    style="@style/SettingsCardViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profileImageView"
+                    app:scvDrawableStart="@drawable/ic_account_circle"
+                    tools:scvText="Meliksah Cakir" />
+
+                <EditText
+                    android:id="@+id/userNameEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="65dp"
+                    android:background="@android:color/transparent"
+                    android:text="Meliksah Cakir"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+                    android:textColor="?attr/colorOnSurface"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/userNameCardView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/userNameCardView"
+                    app:layout_constraintTop_toTopOf="@id/userNameCardView" />
+
+                <View
+                    android:id="@+id/view0"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/colorGray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userNameCardView" />
+
+                <com.meliksahcakir.accountkeeper.view.SettingsCardView
+                    android:id="@+id/userEmailCardView"
+                    style="@style/SettingsCardViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view0"
+                    app:scvDrawableStart="@drawable/ic_email"
+                    tools:scvText="mlkshckr@gmail.com" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/saveButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/save"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/userEmailCardView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="20dp"
-            android:textAppearance="@style/TextAppearance.MyTheme.Body1"
-            android:textColor="@color/colorOnSurface"
-            app:layout_constraintBottom_toTopOf="@id/profileEmailTextView"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/editbutton"
+            android:src="@drawable/ic_edit"
+            app:elevation="10dp"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@id/profileCardView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileImageView"
-            tools:text="Meliksah Cakir" />
-
-        <TextView
-            android:id="@+id/profileEmailTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="20dp"
-            android:textAppearance="@style/TextAppearance.MyTheme.Body1"
-            android:textColor="@color/colorOnSurface"
-            app:layout_constraintBottom_toBottomOf="@id/profileCardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profileUserNameTextView"
-            tools:text="accountkeeper@gmail.com" />
+            app:layout_constraintTop_toTopOf="@id/profileCardView"
+            app:shapeAppearanceOverlay="@style/fab_square" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/settingsCardView"

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -17,10 +18,7 @@ import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.login.LoginActivity
 import com.meliksahcakir.accountkeeper.login.LoginRepository
-import com.meliksahcakir.accountkeeper.utils.EventObserver
-import com.meliksahcakir.accountkeeper.utils.PREF_NIGHT_MODE
-import com.meliksahcakir.accountkeeper.utils.Preferences
-import com.meliksahcakir.accountkeeper.utils.SnackBarParameters
+import com.meliksahcakir.accountkeeper.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.settings_fragment.*
 
@@ -52,6 +50,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpNavigation()
         Preferences.preferences.registerOnSharedPreferenceChangeListener(sharedPreferenceListener)
+        darkThemeSwitch.isChecked = Preferences.nightMode == AppCompatDelegate.MODE_NIGHT_YES
         darkThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             Preferences.nightMode =
                 if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
@@ -66,8 +65,28 @@ class SettingsFragment : Fragment() {
         viewModel.snackBarParams.observe(viewLifecycleOwner, EventObserver {
             showSnackBar(it)
         })
-        profileUserNameTextView.text = Preferences.userName
-        profileEmailTextView.text = Preferences.userEmail
+        viewModel.editing.observe(viewLifecycleOwner) {
+            userNameCardView.isTextVisible = !it
+            userNameEditText.isVisible = it
+            userNameEditText.setText(Preferences.userName)
+            saveButton.isVisible = it
+            if (it) {
+                editButton.setImageResource(R.drawable.ic_close)
+                userNameEditText.requestFocus()
+                userNameEditText.moveCursorToEnd()
+            } else {
+                editButton.setImageResource(R.drawable.ic_edit)
+                userNameCardView.text = Preferences.userName
+            }
+        }
+        userNameCardView.text = Preferences.userName
+        userEmailCardView.text = Preferences.userEmail
+        editButton.setOnClickListener {
+            viewModel.onEditProfileButtonClicked()
+        }
+        saveButton.setOnClickListener {
+            viewModel.onSaveButtonClicked(userNameEditText.text.toString().trim())
+        }
         signOutCardView.setOnClickListener {
             viewModel.onSignOutButtonClicked()
         }

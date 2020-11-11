@@ -44,6 +44,24 @@ class SettingsCardView @JvmOverloads constructor(
             scvEndImageView.isInvisible = value
         }
 
+    var isStartDrawableVisible = false
+        set(value) {
+            field = value
+            scvStartImageView.isInvisible = !field
+        }
+
+    var isEndDrawableVisible = false
+        set(value) {
+            field = value
+            scvEndImageView.isInvisible = !field
+        }
+
+    var isTextVisible = false
+        set(value) {
+            field = value
+            scvTextView.isInvisible = !field
+        }
+
     init {
         View.inflate(context, R.layout.settings_card_view, this)
         isClickable = true

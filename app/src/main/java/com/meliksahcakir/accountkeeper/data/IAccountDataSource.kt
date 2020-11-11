@@ -29,7 +29,7 @@ interface IAccountDataSource {
 
     suspend fun deleteSavedAccounts(): Int
 
-    suspend fun updateRemoteUserInfo(userInfo: UserInfo)
+    suspend fun updateRemoteUserInfo(userInfo: UserInfo): Result<Unit>
 
     suspend fun getRemoteUserInfo(): Result<UserInfo>
 

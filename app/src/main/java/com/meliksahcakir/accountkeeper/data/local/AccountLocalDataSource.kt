@@ -100,8 +100,8 @@ class AccountLocalDataSource internal constructor(
         }
     }
 
-    override suspend fun updateRemoteUserInfo(userInfo: UserInfo) {
-
+    override suspend fun updateRemoteUserInfo(userInfo: UserInfo): Result<Unit> {
+        return Result.Error(Exception("RemoteDataSource should be used"))
     }
 
     override suspend fun getRemoteUserInfo(): Result<UserInfo> {

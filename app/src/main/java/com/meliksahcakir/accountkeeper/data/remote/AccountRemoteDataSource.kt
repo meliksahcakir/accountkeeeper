@@ -7,9 +7,9 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.meliksahcakir.accountkeeper.data.UserInfo
 import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.data.IAccountDataSource
+import com.meliksahcakir.accountkeeper.data.UserInfo
 import com.meliksahcakir.accountkeeper.utils.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -172,9 +172,14 @@ object AccountRemoteDataSource : IAccountDataSource {
         }
     }
 
-    override suspend fun updateRemoteUserInfo(userInfo: UserInfo) {
-        withContext(Dispatchers.IO) {
-            userRef?.set(userInfo)?.await()
+    override suspend fun updateRemoteUserInfo(userInfo: UserInfo): Result<Unit> {
+        return withContext(Dispatchers.IO) {
+            try {
+                userRef?.set(userInfo)?.await()
+                Result.Success(Unit)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
         }
     }
 

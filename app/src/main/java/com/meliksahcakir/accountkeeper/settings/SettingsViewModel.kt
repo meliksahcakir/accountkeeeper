@@ -5,8 +5,8 @@ import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.AccountRepository
+import com.meliksahcakir.accountkeeper.data.UserInfo
 import com.meliksahcakir.accountkeeper.login.LoginRepository
-import com.meliksahcakir.accountkeeper.login.LoginViewModel
 import com.meliksahcakir.accountkeeper.utils.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -24,6 +24,9 @@ class SettingsViewModel(
 
     private val _snackBarParams = MutableLiveData<Event<SnackBarParameters>>()
     val snackBarParams: LiveData<Event<SnackBarParameters>> = _snackBarParams
+
+    private val _editing = MutableLiveData<Boolean>(false)
+    val editing: LiveData<Boolean> = _editing
 
     fun onSignOutButtonClicked() {
         FirebaseAuth.getInstance().signOut()
@@ -65,6 +68,28 @@ class SettingsViewModel(
                     _snackBarParams.value =
                         Event(SnackBarParameters(R.string.password_reset_email_error))
                 }
+            }
+        }
+    }
+
+    fun onEditProfileButtonClicked() {
+        _editing.value = _editing.value == false
+    }
+
+    fun onSaveButtonClicked(newUserName: String) {
+        if (newUserName != "") {
+            viewModelScope.launch {
+                val info = UserInfo(newUserName, Preferences.userEmail,"")
+                val result = repository.updateRemoteUserInfo(info)
+                if (result is Result.Error) {
+                    _snackBarParams.value =
+                        Event(SnackBarParameters(R.string.check_your_network_status))
+                } else {
+                    _snackBarParams.value =
+                        Event(SnackBarParameters(R.string.your_user_name_has_been_updated))
+                    Preferences.userName = newUserName
+                }
+                _editing.value = false
             }
         }
     }

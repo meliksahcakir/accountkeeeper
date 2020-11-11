@@ -118,8 +118,8 @@ class AccountRepository(
         }
     }
 
-    suspend fun updateRemoteUserInfo(userInfo: UserInfo) {
-        withContext(Dispatchers.IO) {
+    suspend fun updateRemoteUserInfo(userInfo: UserInfo): Result<Unit> {
+        return withContext(Dispatchers.IO) {
             remoteDataSource.updateRemoteUserInfo(userInfo)
         }
     }
