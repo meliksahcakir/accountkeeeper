@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
+import com.meliksahcakir.accountkeeper.utils.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class FindAccountsFragment : Fragment() {
 
-    private val viewModel: FindAccountsViewModel by viewModels()
+    private val viewModel: FindAccountsAndUsersViewModel by viewModels() {
+        ViewModelFactory((requireActivity().application as AccountKeeperApplication).accountRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

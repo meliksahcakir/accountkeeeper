@@ -19,8 +19,8 @@
         app:showAsAction="always"
         android:enabled="false" />
     <item
-        android:id="@+id/findAccountsFragment"
-        android:icon="@drawable/ic_search"
+        android:id="@+id/findUsersFragment"
+        android:icon="@drawable/ic_people"
         android:title="@string/find" />
 
     <item

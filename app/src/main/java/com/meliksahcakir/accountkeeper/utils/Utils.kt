@@ -15,6 +15,7 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
 import android.view.ViewAnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -172,3 +173,8 @@ fun createDynamicLinkForTheAccount(userId: String, accountId: String) =
 
         }
     }
+
+fun View.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
+}

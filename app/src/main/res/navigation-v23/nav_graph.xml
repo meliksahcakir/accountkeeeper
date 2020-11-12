@@ -137,4 +137,16 @@
                 android:defaultValue="@null" />
         </action>
     </fragment>
+    <fragment
+        android:id="@+id/findUsersFragment"
+        android:name="com.meliksahcakir.accountkeeper.find.FindUsersFragment"
+        android:label="FindUsersFragment" >
+        <action
+            android:id="@+id/action_findUsersFragment_to_findAccountsFragment"
+            app:destination="@id/findAccountsFragment" >
+            <argument
+                android:name="accountId"
+                android:defaultValue="@null" />
+        </action>
+    </fragment>
 </navigation>

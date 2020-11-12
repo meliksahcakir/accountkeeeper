@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.meliksahcakir.accountkeeper.addupdate.AddUpdateAccountViewModel
 import com.meliksahcakir.accountkeeper.data.AccountRepository
+import com.meliksahcakir.accountkeeper.find.FindAccountsAndUsersViewModel
 import com.meliksahcakir.accountkeeper.friend.FriendAccountsViewModel
 import com.meliksahcakir.accountkeeper.personal.PersonalAccountsViewModel
-import com.meliksahcakir.accountkeeper.settings.SettingsViewModel
 import com.meliksahcakir.accountkeeper.splash.SplashViewModel
 
 @Suppress("UNCHECKED_CAST")
@@ -24,6 +24,8 @@ class ViewModelFactory(private val repository: AccountRepository) :
                     SplashViewModel(repository)
                 isAssignableFrom(AddUpdateAccountViewModel::class.java) ->
                     AddUpdateAccountViewModel(repository)
+                isAssignableFrom(FindAccountsAndUsersViewModel::class.java) ->
+                    FindAccountsAndUsersViewModel(repository)
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
         } as T

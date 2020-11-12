@@ -202,10 +202,13 @@ object AccountRemoteDataSource : IAccountDataSource {
     override suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>> {
         return withContext(Dispatchers.IO) {
             try {
-                val snapshot = db.collection("users").get().await()
+                val snapshot =
+                    db.collection("users").whereEqualTo("username", userName).get().await()
                 if (snapshot != null) {
                     val documents = snapshot.documents
-                    val list = documents.mapNotNull { it.toObject(UserInfo::class.java) }
+                    val list = documents.mapNotNull { doc ->
+                        doc.toObject(UserInfo::class.java).also { user -> user?.uid = doc.id }
+                    }
                     Result.Success(list)
                 } else {
                     Result.Error(Exception("Cannot retrieve users"))

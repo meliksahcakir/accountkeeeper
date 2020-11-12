@@ -34,12 +34,11 @@ abstract class BaseAccountAdapter(private val listener: AccountAdapterListener) 
         }
 
         override fun areContentsTheSame(oldItem: Account, newItem: Account): Boolean {
-            return oldItem.accountId == newItem.accountId
+            return oldItem == newItem
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseAccountViewHolder {
-        LayoutInflater.from(parent.context).inflate(R.layout.account_view, parent, false)
         return BaseAccountViewHolder(parent)
     }
 

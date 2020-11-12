@@ -65,4 +65,9 @@
     <string name="editbutton">editButton</string>
     <string name="check_your_network_status">Check your network status.</string>
     <string name="your_user_name_has_been_updated">Your username has been updated successfully.</string>
+    <string name="user_not_found">User has not been found.</string>
+    <string name="search_by_name_and_surname">Search by Name and Surname</string>
+    <string name="retry">Retry</string>
+    <string name="find_users_accounts_by_searching_their_name">Find users\' accounts ny searching their name</string>
+    <string name="search_for_users_to_see_their_accounts">Search for users to see their accounts.</string>
 </resources>
