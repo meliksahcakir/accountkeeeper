@@ -1,5 +1,6 @@
 package com.meliksahcakir.accountkeeper.find
 
+import androidx.core.text.trimmedLength
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,7 @@ import com.meliksahcakir.accountkeeper.utils.Result
 import com.meliksahcakir.accountkeeper.utils.SnackBarAction
 import com.meliksahcakir.accountkeeper.utils.SnackBarParameters
 import kotlinx.coroutines.launch
+import java.util.*
 
 class FindAccountsAndUsersViewModel(private val repository: AccountRepository) : ViewModel() {
 
@@ -34,11 +36,13 @@ class FindAccountsAndUsersViewModel(private val repository: AccountRepository) :
 
     fun updateSearchParameter(username: String) {
         searchParameter = username
-        if (username == "") {
+        if (username.trimmedLength() < 3) {
             _userList.value = emptyList()
+            _snackBarParams.value =
+                Event(SnackBarParameters(R.string.try_to_search_for_longer_name))
         } else {
             viewModelScope.launch {
-                val result = repository.getRemoteUserList(username)
+                val result = repository.getRemoteUserList(username.toLowerCase(Locale.getDefault()))
                 if (result is Result.Success) {
                     _userList.value = result.data
                 } else {

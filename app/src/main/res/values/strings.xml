@@ -70,4 +70,5 @@
     <string name="retry">Retry</string>
     <string name="find_users_accounts_by_searching_their_name">Find users\' accounts ny searching their name</string>
     <string name="search_for_users_to_see_their_accounts">Search for users to see their accounts.</string>
+    <string name="try_to_search_for_longer_name">Try to search for a longer name.</string>
 </resources>

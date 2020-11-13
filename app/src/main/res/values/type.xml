@@ -61,6 +61,20 @@
         <item name="android:textColor">@color/colorPrimaryVariant</item>
     </style>
 
+    <style name="TextAppearance.MyTheme.Subtitle3" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textColor">@color/colorPrimaryVariant</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.MyTheme.Subtitle4" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/colorChipIcon</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="TextAppearance.MyTheme.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:fontFamily">@font/montserrat_light</item>
         <item name="fontFamily">@font/montserrat_light</item>
