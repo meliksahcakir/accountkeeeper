@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -103,6 +104,9 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
         }
         shareImageView.setOnClickListener {
             listener.onShareAccount(account)
+        }
+        if(!account.global) {
+            shareImageView.isInvisible = true
         }
     }
 

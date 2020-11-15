@@ -239,7 +239,7 @@ object AccountRemoteDataSource : IAccountDataSource {
                     collection.whereEqualTo("global", true).whereEqualTo("accountId", accountId)
                         .get().await()
                 } else {
-                    collection.whereEqualTo("global", true).get().await()
+                    collection.whereEqualTo("global", true).whereEqualTo("personalAccount", true).get().await()
                 }
                 if (snapshot != null) {
                     val documents = snapshot.documents

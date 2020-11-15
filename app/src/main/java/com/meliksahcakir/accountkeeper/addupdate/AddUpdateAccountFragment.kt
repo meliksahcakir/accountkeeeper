@@ -65,16 +65,6 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
         accountNumberEditText.afterTextChanged {
             accountNumberErrorImageView.isVisible = false
         }
-        personalChipGroup.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId == R.id.personalYesChip) {
-                privacyYesChip.isEnabled = true
-                privacyNoChip.isEnabled = true
-            } else {
-                privacyYesChip.isEnabled = false
-                privacyNoChip.isEnabled = false
-                privacyChipGroup.check(R.id.privacyYesChip)
-            }
-        }
         setUpNavigation()
         viewModel.busy.observe(viewLifecycleOwner) {
             progressBar.isInvisible = !it
@@ -152,7 +142,7 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
                 else -> Account.OTHER
             }
             val personal = personalChipGroup.checkedChipId == R.id.personalYesChip
-            val global = personal && privacyChipGroup.checkedChipId == R.id.privacyNoChip
+            val global = privacyChipGroup.checkedChipId == R.id.privacyNoChip
             if (isRequiredFieldsAreAvailable()) {
                 viewModel.saveAccount(name, number, desc, type, personal, global)
             }
