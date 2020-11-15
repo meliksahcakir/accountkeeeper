@@ -124,15 +124,24 @@ class AccountRepository(
         }
     }
 
-    suspend fun getRemoteUserInfo(): Result<UserInfo> {
+    suspend fun getRemoteUserInfo(userId: String = uid): Result<UserInfo> {
         return withContext(Dispatchers.IO) {
-            remoteDataSource.getRemoteUserInfo()
+            remoteDataSource.getRemoteUserInfo(userId)
         }
     }
 
     suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>> {
         return withContext(Dispatchers.IO) {
             remoteDataSource.getRemoteUserList(userName)
+        }
+    }
+
+    suspend fun getRemoteAccountList(
+        userId: String,
+        accountId: String?
+    ): Result<List<Account>> {
+        return withContext(Dispatchers.IO) {
+            remoteDataSource.getRemoteAccountList(userId, accountId)
         }
     }
 }

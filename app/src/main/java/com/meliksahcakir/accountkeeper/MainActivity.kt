@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         when (destination.id) {
             R.id.personalAccountsFragment -> mainFab.setImageResource(R.drawable.ic_add)
             R.id.friendAccountsFragment -> mainFab.setImageResource(R.drawable.ic_add)
-            R.id.findAccountsFragment -> mainFab.setImageResource(R.drawable.ic_search)
+            R.id.findAccountsFragment -> mainFab.setImageResource(R.drawable.ic_back)
             R.id.findUsersFragment -> mainFab.setImageResource(R.drawable.ic_search)
             R.id.settingsFragment -> mainFab.setImageResource(R.drawable.ic_home)
             R.id.addUpdateAccountFragment -> mainFab.setImageResource(R.drawable.ic_save)

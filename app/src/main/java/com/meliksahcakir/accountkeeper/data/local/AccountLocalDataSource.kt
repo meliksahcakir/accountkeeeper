@@ -104,11 +104,18 @@ class AccountLocalDataSource internal constructor(
         return Result.Error(Exception("RemoteDataSource should be used"))
     }
 
-    override suspend fun getRemoteUserInfo(): Result<UserInfo> {
+    override suspend fun getRemoteUserInfo(userId: String ): Result<UserInfo> {
         return Result.Error(Exception("RemoteDataSource should be used"))
     }
 
     override suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>> {
+        return Result.Error(Exception("RemoteDataSource should be used"))
+    }
+
+    override suspend fun getRemoteAccountList(
+        userId: String,
+        accountId: String?
+    ): Result<List<Account>> {
         return Result.Error(Exception("RemoteDataSource should be used"))
     }
 }

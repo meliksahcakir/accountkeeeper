@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.meliksahcakir.accountkeeper.view.UserCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/userCardView"
+    style="@style/MaterialCardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="10dp"
+    app:ucvDrawableEnd="@drawable/ic_arrow_right"
+    app:ucvDrawableStart="@drawable/ic_account_keeper"
+    tools:ucvSubTitle="mlkshckr@gmail.com"
+    tools:ucvTitle="Meliksah Cakir" />

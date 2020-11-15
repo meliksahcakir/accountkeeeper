@@ -1,0 +1,13 @@
+<resources>
+    <declare-styleable name="SettingsCardView">
+        <attr name="scvText" format="string" />
+        <attr name="scvDrawableStart" format="reference|color" />
+        <attr name="scvDrawableEnd" format="reference|color" />
+    </declare-styleable>
+    <declare-styleable name="UserCardView">
+        <attr name="ucvTitle" format="string" />
+        <attr name="ucvSubTitle" format="string" />
+        <attr name="ucvDrawableStart" format="reference|color" />
+        <attr name="ucvDrawableEnd" format="reference|color" />
+    </declare-styleable>
+</resources>

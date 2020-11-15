@@ -4,20 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.meliksahcakir.accountkeeper.AccountKeeperApplication
 import com.meliksahcakir.accountkeeper.MainActivity
 import com.meliksahcakir.accountkeeper.R
+import com.meliksahcakir.accountkeeper.data.Account
+import com.meliksahcakir.accountkeeper.utils.EventObserver
 import com.meliksahcakir.accountkeeper.utils.ViewModelFactory
+import com.meliksahcakir.accountkeeper.utils.drawable
+import com.meliksahcakir.accountkeeper.view.AccountAdapterListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.find_accounts_fragment.*
+import timber.log.Timber
 
-class FindAccountsFragment : Fragment() {
+class FindAccountsFragment : Fragment(), AccountAdapterListener {
 
     private val viewModel: FindAccountsAndUsersViewModel by viewModels() {
         ViewModelFactory((requireActivity().application as AccountKeeperApplication).accountRepository)
     }
+
+    private lateinit var mAdapter: FindAccountAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,23 +40,51 @@ class FindAccountsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpNavigation()
+        mAdapter = FindAccountAdapter(this)
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = mAdapter
+        }
+
         arguments?.let {
             val args = FindAccountsFragmentArgs.fromBundle(it)
             val userId = args.userId
             val accountId = args.accountId
-            Toast.makeText(
-                requireContext(),
-                "uid: $userId  accountId: $accountId",
-                Toast.LENGTH_SHORT
-            ).show()
+            Timber.d("args: uid: $userId  accountId: $accountId")
+            viewModel.getUserInfoAndAccounts(userId, accountId)
         }
+        viewModel.accounts.observe(viewLifecycleOwner) {
+            emptyListGroup.isVisible = it.isEmpty()
+            recyclerView.isVisible = it.isNotEmpty()
+            mAdapter.submitList(it)
+        }
+        viewModel.busy.observe(viewLifecycleOwner) {
+            progressBar.isVisible = it
+        }
+        viewModel.userInfoAvailable.observe(viewLifecycleOwner, EventObserver {
+            userCardView.title = it.username
+            userCardView.subTitle = it.email
+            userCardView.drawableStart = context?.drawable(R.drawable.ic_account_keeper)
+        })
     }
 
     private fun setUpNavigation() {
         val mainFab = (requireActivity() as MainActivity).mainFab
         mainFab.setOnClickListener {
-
+            findNavController().navigateUp()
         }
+    }
+
+    override fun onEditButtonClicked(account: Account) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onShareAccount(account: Account) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteAccount(account: Account) {
+        TODO("Not yet implemented")
     }
 
 }

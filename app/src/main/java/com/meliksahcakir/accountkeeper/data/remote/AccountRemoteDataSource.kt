@@ -183,10 +183,10 @@ object AccountRemoteDataSource : IAccountDataSource {
         }
     }
 
-    override suspend fun getRemoteUserInfo(): Result<UserInfo> {
+    override suspend fun getRemoteUserInfo(userId: String): Result<UserInfo> {
         return withContext(Dispatchers.IO) {
             try {
-                val snapshot = userRef?.get()?.await()
+                val snapshot = db.collection("users").document(userId).get().await()
                 val userInfo = snapshot?.toObject(UserInfo::class.java)
                 if (userInfo != null) {
                     Result.Success(userInfo)
@@ -220,6 +220,38 @@ object AccountRemoteDataSource : IAccountDataSource {
                     Result.Success(list)
                 } else {
                     Result.Error(Exception("Cannot retrieve users"))
+                }
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
+        }
+    }
+
+    override suspend fun getRemoteAccountList(
+        userId: String,
+        accountId: String?
+    ): Result<List<Account>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val ref = db.collection("users").document(userId)
+                val collection = ref.collection("accounts")
+                val snapshot = if (accountId != null && accountId != "") {
+                    collection.whereEqualTo("global", true).whereEqualTo("accountId", accountId)
+                        .get().await()
+                } else {
+                    collection.whereEqualTo("global", true).get().await()
+                }
+                if (snapshot != null) {
+                    val documents = snapshot.documents
+                    val list = documents.mapNotNull { doc ->
+                        doc.toObject(Account::class.java).also { account ->
+                            account?.userId = uid
+                            account?.personalAccount = false
+                        }
+                    }
+                    Result.Success(list)
+                } else {
+                    Result.Error(Exception("Cannot retrieve accounts"))
                 }
             } catch (e: Exception) {
                 Result.Error(e)

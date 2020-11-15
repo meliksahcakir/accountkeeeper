@@ -2,15 +2,13 @@ package com.meliksahcakir.accountkeeper.find
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.UserInfo
-import kotlinx.android.synthetic.main.user_view.view.*
+import com.meliksahcakir.accountkeeper.view.UserCardView
+import kotlinx.android.synthetic.main.user_adapter_view.view.*
 
 class UserAdapter(private val listener: OnClickListener) :
     ListAdapter<UserInfo, UserViewHolder>(DiffCallback) {
@@ -34,16 +32,13 @@ class UserAdapter(private val listener: OnClickListener) :
 }
 
 class UserViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.user_view, parent, false)
+    LayoutInflater.from(parent.context).inflate(R.layout.user_adapter_view, parent, false)
 ) {
-    private val profileImageView: ImageView by lazy { itemView.userProfileImageView }
-    private val userNameTextView: TextView by lazy { itemView.userNameTextView }
-    private val userEmailTextView: TextView by lazy { itemView.userEmailTextView }
-    private val userCardView: MaterialCardView by lazy { itemView.userCardView }
+    private val userCardView: UserCardView by lazy { itemView.userCardView }
 
     fun bind(user: UserInfo, listener: OnClickListener) {
-        userNameTextView.text = user.username
-        userEmailTextView.text = user.email
+        userCardView.title = user.username
+        userCardView.subTitle = user.email
         userCardView.setOnClickListener {
             listener.onClick(user)
         }

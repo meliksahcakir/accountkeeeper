@@ -31,7 +31,9 @@ interface IAccountDataSource {
 
     suspend fun updateRemoteUserInfo(userInfo: UserInfo): Result<Unit>
 
-    suspend fun getRemoteUserInfo(): Result<UserInfo>
+    suspend fun getRemoteUserInfo(userId: String): Result<UserInfo>
 
     suspend fun getRemoteUserList(userName: String): Result<List<UserInfo>>
+
+    suspend fun getRemoteAccountList(userId: String, accountId: String?): Result<List<Account>>
 }

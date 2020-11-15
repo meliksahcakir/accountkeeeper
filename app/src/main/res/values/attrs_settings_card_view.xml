@@ -1,7 +1,0 @@
-<resources>
-    <declare-styleable name="SettingsCardView">
-        <attr name="scvText" format="string" />
-        <attr name="scvDrawableStart" format="reference|color" />
-        <attr name="scvDrawableEnd" format="reference|color" />
-    </declare-styleable>
-</resources>

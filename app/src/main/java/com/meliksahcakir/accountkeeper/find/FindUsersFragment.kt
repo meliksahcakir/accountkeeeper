@@ -67,7 +67,7 @@ class FindUsersFragment : Fragment(), OnClickListener {
 
         viewModel.navigateToFindAccountsFragment.observe(viewLifecycleOwner, EventObserver {
             val direction =
-                FindUsersFragmentDirections.actionFindUsersFragmentToFindAccountsFragment(it.uid)
+                FindUsersFragmentDirections.actionFindUsersFragmentToFindAccountsFragment(null, it.uid)
             findNavController().navigate(direction)
         })
 

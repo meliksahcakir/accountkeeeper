@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meliksahcakir.accountkeeper.R
+import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.data.AccountRepository
 import com.meliksahcakir.accountkeeper.data.UserInfo
 import com.meliksahcakir.accountkeeper.utils.Event
@@ -23,6 +24,9 @@ class FindAccountsAndUsersViewModel(private val repository: AccountRepository) :
     private val _userList = MutableLiveData<List<UserInfo>>(emptyList())
     val userList: LiveData<List<UserInfo>> = _userList
 
+    private val _accounts = MutableLiveData<List<Account>>(emptyList())
+    val accounts: LiveData<List<Account>> = _accounts
+
     private val _busy = MutableLiveData<Boolean>(false)
     val busy: LiveData<Boolean> = _busy
 
@@ -31,6 +35,9 @@ class FindAccountsAndUsersViewModel(private val repository: AccountRepository) :
 
     private val _navigateToFindAccountsFragment = MutableLiveData<Event<UserInfo>>()
     val navigateToFindAccountsFragment: LiveData<Event<UserInfo>> = _navigateToFindAccountsFragment
+
+    private val _userInfoAvailable = MutableLiveData<Event<UserInfo>>()
+    val userInfoAvailable: LiveData<Event<UserInfo>> = _userInfoAvailable
 
     private var selectedUser: UserInfo? = null
 
@@ -64,5 +71,38 @@ class FindAccountsAndUsersViewModel(private val repository: AccountRepository) :
     fun onUserSelected(userInfo: UserInfo) {
         selectedUser = userInfo
         _navigateToFindAccountsFragment.value = Event(userInfo)
+    }
+
+    fun getUserInfoAndAccounts(userId: String?, accountId: String?) {
+        viewModelScope.launch {
+            if (selectedUser != null && selectedUser?.uid == userId) {
+                _userInfoAvailable.value = Event(selectedUser!!)
+                getUserAccounts(userId!!, accountId)
+            } else {
+                if (userId == null) {
+                    _snackBarParams.value = Event(SnackBarParameters(R.string.user_not_found))
+                } else {
+                    _busy.value = true
+                    val result = repository.getRemoteUserInfo(userId)
+                    if (result is Result.Success) {
+                        selectedUser = result.data
+                        _userInfoAvailable.value = Event(selectedUser!!)
+                        getUserAccounts(userId, accountId)
+                    } else {
+                        _snackBarParams.value = Event(SnackBarParameters(R.string.user_not_found))
+                    }
+                    _busy.value = false
+                }
+            }
+        }
+    }
+
+    private suspend fun getUserAccounts(userId: String, accountId: String?) {
+        val accountsResult = repository.getRemoteAccountList(userId, accountId)
+        if (accountsResult is Result.Success) {
+            _accounts.value = accountsResult.data
+        } else {
+            _snackBarParams.value = Event(SnackBarParameters(R.string.accounts_not_found))
+        }
     }
 }
