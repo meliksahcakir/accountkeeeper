@@ -17,6 +17,7 @@ import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.utils.EventObserver
 import com.meliksahcakir.accountkeeper.utils.ViewModelFactory
 import com.meliksahcakir.accountkeeper.utils.drawable
+import com.meliksahcakir.accountkeeper.utils.findLocationOfCenterOnTheScreen
 import com.meliksahcakir.accountkeeper.view.AccountAdapterListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.find_accounts_fragment.*
@@ -73,18 +74,32 @@ class FindAccountsFragment : Fragment(), AccountAdapterListener {
         mainFab.setOnClickListener {
             findNavController().navigateUp()
         }
+        viewModel.saveAccountEvent.observe(viewLifecycleOwner, EventObserver {
+            val location = mainFab.findLocationOfCenterOnTheScreen()
+            val action = FindAccountsFragmentDirections
+                .actionFindAccountsFragmentToAddUpdateAccountFragment(
+                    it.accountId,
+                    false,
+                    location,
+                     it
+                )
+            findNavController().navigate(action)
+        })
     }
 
     override fun onEditButtonClicked(account: Account) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onShareAccount(account: Account) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onDeleteAccount(account: Account) {
-        TODO("Not yet implemented")
+
     }
 
+    override fun onSaveAccount(account: Account) {
+        viewModel.onSaveButtonClicked(account)
+    }
 }

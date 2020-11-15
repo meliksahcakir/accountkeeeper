@@ -28,6 +28,7 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
 
     private var accountId = ""
     private var personal = true
+    private var initialAccount: Account? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,7 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
             }
             accountId = args.accountId ?: ""
             personal = args.personal
+            initialAccount = args.account
         }
     }
 
@@ -112,7 +114,11 @@ class AddUpdateAccountFragment : Fragment(), ExitWithAnimation {
                 }
             }
         })
-        viewModel.start(accountId, personal)
+        if (initialAccount != null) {
+            viewModel.start(initialAccount!!)
+        } else {
+            viewModel.start(accountId, personal)
+        }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (posX == null || posY == null) {
                 findNavController().navigateUp()

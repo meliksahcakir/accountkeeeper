@@ -1,10 +1,13 @@
 package com.meliksahcakir.accountkeeper.data
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 @Entity(tableName = "accounts")
 data class Account(
     @ColumnInfo(name = "accountName")
@@ -25,7 +28,7 @@ data class Account(
     @ColumnInfo(name = "accountId")
     var accountId: String = UUID.randomUUID().toString()
 
-) {
+) : Parcelable {
     companion object {
         const val BANK_ACCOUNT = 0
         const val CRYPTO = 1

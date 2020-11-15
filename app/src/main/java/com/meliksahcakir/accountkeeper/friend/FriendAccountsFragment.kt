@@ -113,6 +113,10 @@ class FriendAccountsFragment : Fragment(), AccountAdapterListener {
         viewModel.deleteAccount(account)
     }
 
+    override fun onSaveAccount(account: Account) {
+
+    }
+
     private fun showSnackBar(parameters: SnackBarParameters) {
         val snackbar =
             Snackbar.make(requireView(), parameters.messageStringId, Snackbar.LENGTH_SHORT)

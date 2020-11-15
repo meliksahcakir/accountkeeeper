@@ -9,6 +9,7 @@ import com.meliksahcakir.accountkeeper.data.AccountRepository
 import com.meliksahcakir.accountkeeper.utils.Event
 import com.meliksahcakir.accountkeeper.utils.Result
 import kotlinx.coroutines.launch
+import java.util.*
 
 class AddUpdateAccountViewModel(private val repository: AccountRepository) : ViewModel() {
 
@@ -25,6 +26,22 @@ class AddUpdateAccountViewModel(private val repository: AccountRepository) : Vie
     val accountInitialized: LiveData<Event<Account>> = _accountInitialized
 
     private var account: Account? = null
+
+    fun start(account: Account) {
+        this.accountId = account.accountId
+        newAccount = true
+        _busy.value = true
+        this.account = account
+        viewModelScope.launch {
+            repository.getAccount(accountId).let {
+                if (it is Result.Success) {
+                    account.accountId = UUID.randomUUID().toString()
+                }
+                _busy.value = false
+                _accountInitialized.value = Event(account)
+            }
+        }
+    }
 
     fun start(accountId: String, personal: Boolean) {
         if (_busy.value == true) {

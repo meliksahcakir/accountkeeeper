@@ -21,6 +21,7 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.meliksahcakir.accountkeeper.R
 import com.meliksahcakir.accountkeeper.data.Account
 import com.meliksahcakir.accountkeeper.utils.DP_150_IN_PX
+import com.meliksahcakir.accountkeeper.utils.copyToClipboard
 import com.meliksahcakir.accountkeeper.utils.share
 import kotlinx.android.synthetic.main.account_view.view.*
 import kotlinx.android.synthetic.main.qr_code_dialog.view.*
@@ -59,14 +60,14 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
     private val accountNameTextView: TextView by lazy { itemView.accountNameTextView }
     private val accountAddressTextView: TextView by lazy { itemView.accountAddressTextView }
     private val accountAddressImageView: ImageView by lazy { itemView.accountAddressImageView }
-    private val editImageView: ImageView by lazy { itemView.editImageView }
+    protected val editImageView: ImageView by lazy { itemView.editImageView }
     private val accountLayout: ConstraintLayout by lazy { itemView.accountLayout }
     private val accountDescriptionTextView: TextView by lazy { itemView.accountDescriptionTextView }
     private val descriptionGroup: Group by lazy { itemView.descriptionGroup }
     private val qrImageView: ImageView by lazy { itemView.qrImageView }
     private val privacyImageView: ImageView by lazy { itemView.privacyImageView }
     private val copyAddressButton: MaterialButton by lazy { itemView.copyAddressButton }
-    private val shareImageView: ImageView by lazy { itemView.shareImageView }
+    protected val shareImageView: ImageView by lazy { itemView.shareImageView }
 
     private val writer = QRCodeWriter()
 
@@ -74,7 +75,7 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
         accountLayout.setBackgroundResource(resourceId)
     }
 
-    fun bind(account: Account, listener: AccountAdapterListener) {
+    open fun bind(account: Account, listener: AccountAdapterListener) {
         val resId = when (account.accountType) {
             Account.BANK_ACCOUNT -> R.drawable.ic_card
             Account.CRYPTO -> R.drawable.ic_bitcoin
@@ -90,7 +91,9 @@ open class BaseAccountViewHolder(private val parent: ViewGroup) : RecyclerView.V
         descriptionGroup.isVisible = account.accountDescription != ""
         privacyImageView.setImageResource(if (account.global) R.drawable.ic_public else R.drawable.ic_private)
         copyAddressButton.setOnClickListener {
-            parent.context.share(accountAddressTextView.text.toString())
+            val address = accountAddressTextView.text.toString()
+            parent.context.copyToClipboard(address)
+            parent.context.share(address)
         }
         qrImageView.setOnClickListener {
             showQrCodeDialog(accountAddressTextView.text.toString())
@@ -135,4 +138,5 @@ interface AccountAdapterListener {
     fun onEditButtonClicked(account: Account)
     fun onShareAccount(account: Account)
     fun onDeleteAccount(account: Account)
+    fun onSaveAccount(account: Account)
 }

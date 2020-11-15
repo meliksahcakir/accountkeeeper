@@ -41,6 +41,9 @@ class FindAccountsAndUsersViewModel(private val repository: AccountRepository) :
 
     private var selectedUser: UserInfo? = null
 
+    private val _saveAccountEvent = MutableLiveData<Event<Account>>()
+    val saveAccountEvent: LiveData<Event<Account>> = _saveAccountEvent
+
     fun updateSearchParameter(username: String) {
         searchParameter = username
         if (username.trimmedLength() < 3) {
@@ -104,5 +107,22 @@ class FindAccountsAndUsersViewModel(private val repository: AccountRepository) :
         } else {
             _snackBarParams.value = Event(SnackBarParameters(R.string.accounts_not_found))
         }
+    }
+
+    fun onSaveButtonClicked(account: Account) {
+        if (selectedUser == null) return
+        val acc = with(account) {
+            Account(
+                accountName = "${selectedUser!!.username} - $accountName",
+                accountNumber = accountNumber,
+                accountDescription = accountDescription,
+                personalAccount = false,
+                global = false,
+                accountType = accountType,
+                userId = repository.getUserId(),
+                accountId = accountId
+            )
+        }
+        _saveAccountEvent.value = Event(acc)
     }
 }
